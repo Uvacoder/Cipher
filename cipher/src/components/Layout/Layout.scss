@@ -1,0 +1,15 @@
+.app-layout {
+  height: 100%;
+  background: linear-gradient(to bottom, #99f2c8, #1f4037);
+  display: flex;
+  justify-content: center;
+
+
+  .app-layout__container{
+    height: 100%;  
+    width: 70%;
+    display: grid;  
+    grid-template-rows: 1fr 8fr 1fr;
+    background-color: lightcoral;
+  }
+}
