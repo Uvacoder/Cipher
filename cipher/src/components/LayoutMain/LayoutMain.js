@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LayoutMain.scss';
 import { Input, Button, Card } from 'antd';
-// import convertToBinary from '../../Utils/AsciiToBinary'
 import Cipher from '../Cipher/Cipher'
 
 const { TextArea } = Input;
 
 function LayoutMain() {
+
+  const [inputText, setInputText] = useState("");
+  const [outputText, setoutputText] = useState("");
+
+  const createCipher = (text) => {
+    const cipher = new Cipher('klucz', 5)
+    setoutputText(inputText)
+    console.log(outputText)
+    console.log(cipher)
+    console.log(cipher.encrypt(text))
+  }
 
   return (
     <main className="layout-main">
@@ -14,13 +24,14 @@ function LayoutMain() {
         <TextArea 
           bordered={false} 
           autoSize={false}
+          onChange={e => setInputText(e.target.value)}
         />
       </Card>
       <div className="layout-main__buttons">
         <Button 
           className="layout-main__buttons--encode" 
           type="primary"
-          // onClick={() => console.log(convertToBinary('abc'))}
+          onClick={() => createCipher('abc')}
         >
           Encode
         </Button>
@@ -29,9 +40,7 @@ function LayoutMain() {
         </Button>
       </div>
       <Card title="Output" className="layout-main__output">
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
+        <div>{ outputText }</div>
       </Card>
       <div className="layout-main__key">
         <Input 
