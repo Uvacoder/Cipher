@@ -1,11 +1,12 @@
-import React from 'react';
-import './Cipher.scss';
- 
-function Cipher() {
- 
-  return (
-    <div></div>
-  );
+import convertToBinary from '../../Utils/AsciiToBinary'
+
+export class Cipher {
+  constructor(key, rounds) {
+    this.key = key
+    this.rounds = rounds
+  }
+
+  encrypt(text) {
+    return convertToBinary(text)
+  }
 }
- 
-export default Cipher;

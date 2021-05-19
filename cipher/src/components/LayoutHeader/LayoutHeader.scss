@@ -1,6 +1,6 @@
 .layout-header {
   width: 100%;
-  border-bottom: solid 1px black;
+  border-bottom: 2px solid #4f504d;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +15,7 @@
 
   p:nth-child(2) {
     font-size: 1.75em;
-    color: white;
+    color: rgb(197, 200, 198);
     font-weight: 600;
   }
 }
