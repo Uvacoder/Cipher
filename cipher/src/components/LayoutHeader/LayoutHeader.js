@@ -5,8 +5,10 @@ function LayoutHeader() {
  
   return (
     <header className="layout-header">
-      <span>Encryption Tool</span>
+      <p>Encryption Tool</p>
+      <p>An encryption tool implementing Feistel Cipher</p>
     </header>
+    
   );
 }
  
