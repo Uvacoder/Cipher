@@ -3,19 +3,19 @@ $background-color-header: #353634;
 $background-color-input: #1D1F21;
 $border-props: 1px solid #4f504d;
 
-.layout-main{
+.main{
   display: grid;
   grid-template-columns: 3fr 1.5fr 3fr;
   grid-template-rows: 5fr 1fr;
   grid-gap: 1em;
 
-  .layout-main__buttons{
+  .main__buttons{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    .layout-main__buttons--encode, .layout-main__buttons--decode{
+    .main__buttons--encode, .main__buttons--decode{
       border-radius: 8px;
       font-size: 1.1em;
       border: none;
@@ -27,12 +27,12 @@ $border-props: 1px solid #4f504d;
       background-color: #eeda7c;
     }
 
-    .layout-main__buttons--encode:hover, .layout-main__buttons--decode:hover{
+    .main__buttons--encode:hover, .main__buttons--decode:hover{
       transform: scale(1.05);
     }
   }
 
-  .layout-main__output, .layout-main__input {
+  .main__output, .main__input {
     justify-self: center;
     background-color: $background-color-header;
     width: 90%;
@@ -60,7 +60,7 @@ $border-props: 1px solid #4f504d;
     }
   }
 
-  .layout-main__key {
+  .main__key {
     grid-column-start: 1;
     grid-column-end: 4;
     align-self: center;
@@ -77,6 +77,7 @@ $border-props: 1px solid #4f504d;
     .ant-input{
       background: $background-color-input;
       border: none;
+      color: $font-color;
     }
   }
 }
