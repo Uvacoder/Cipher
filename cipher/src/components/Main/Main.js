@@ -11,7 +11,7 @@ function Main() {
   const [outputText, setOutputText] = useState("");
   const [key, setKey] = useState("");
 
-  const createCipher = (inputValue) => {
+  const encipher = (inputValue) => {
     const cipher = new Cipher(key)
     const encryptedValue = cipher.encrypt(inputValue);
     setKey(cipher.getKey())
@@ -22,6 +22,10 @@ function Main() {
     const cipher = new Cipher(key)
     const decipherValue = cipher.decrypt(inputValue)
     setOutputText(decipherValue)
+  }
+
+  const checkAndExecute = (func) => {
+    inputText ? func() : console.error('You need some input in order to do that')
   }
 
   return (
@@ -37,14 +41,14 @@ function Main() {
         <Button 
           className="main__buttons--encode" 
           type="primary"
-          onClick={() => createCipher(inputText)}
+          onClick={() => checkAndExecute(() => encipher(inputText))}
         >
           Encode
         </Button>
         <Button 
           className="main__buttons--decode" 
           type="primary"
-          onClick={() => decipher(inputText)}
+          onClick={() => checkAndExecute(() => decipher(inputText))}
         >
           Decode
         </Button>

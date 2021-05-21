@@ -10,3 +10,13 @@ export const generateKey = (length) => {
 
   return key.repeat(Math.ceil(length / keyLength))
 }
+
+export const checkLenghtAndFix = (key, length) => {
+  if (key.length === length) {
+    return key
+  } else if (key.length > length) {
+    return key.substr(1, length)
+  }
+
+  return key.repeat(Math.ceil(length / key.length))
+}
