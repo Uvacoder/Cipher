@@ -7,52 +7,70 @@ export default class Cipher {
   constructor(key, rounds) {
     this.key = key
     this.rounds = rounds
+    this.encryptionFunction = xor
   }
   
   getKey() {
     return this.key;
   }
 
-  encrypt(data) {
+  makeRound(left, right, key) {
+    const functionResult = this.encryptionFunction(right, key);
+    const newRight = xor(functionResult, left);
+    const newLeft = right;
 
-    const key = generateKey(data.length)
-    const binaryData = textToBinary(data)
+    return [newLeft, newRight]
+  }
+
+  divideEvenly(binaryText) {
+    const half = binaryText.length / 2;
+
+    return [binaryText.substr(0, half), binaryText.substr(half)];
+  }
+  
+  sumAndConvertToText(left, right) {
+    const binaryResult = right + left
+
+    return binaryToText(binaryResult)
+  }
+
+
+
+  encrypt(text) {
+
+    const key = generateKey(text.length)
+    const binaryData = textToBinary(text)
     const binaryKey = textToBinary(key)
-    const keyParts = split(binaryKey)
-    const encryptionFunction = xor
-    let cipherParts = split(binaryData)
+    const keyParts = this.divideEvenly(binaryKey)
+
+    let [left, right] = this.divideEvenly(binaryData)
 
     this.key = key
 
     for (let i = 0; i < 2; i++) {
-      const temp = xor(encryptionFunction(cipherParts[1], keyParts[i]), cipherParts[0])
-      cipherParts = [cipherParts[1], temp]
+      [left, right] = this.makeRound(left, right, keyParts[i]);
     }
 
-    const binaryResult = cipherParts[0] + cipherParts[1]
-    const cipher = binaryToText(binaryResult)
-    const base64Cipher = btoa(cipher)
     
-    return base64Cipher
+    const cipher = this.sumAndConvertToText(left, right)
+    // const base64Cipher = btoa(cipher)
+    
+    return cipher
   }
 
   decrypt(base64Cipher) {
 
-    const cipher = atob(base64Cipher)
-    const binaryCipher = textToBinary(cipher)
+    // const cipher = atob(base64Cipher)
+    // const cipher = atob(base64Cipher)
+    const binaryCipher = textToBinary(base64Cipher)
     const binaryKey = textToBinary(this.key)
-    const keyParts = split(binaryKey)
-    const decryptionFunction = xor
-    let cipherParts = split(binaryCipher)
+    const keyParts = this.divideEvenly(binaryKey)
+    let [left, right] = this.divideEvenly(binaryCipher)
 
     for (let i = 1; i >= 0; i--) {
-      const temp = xor(decryptionFunction(cipherParts[0], keyParts[i]), cipherParts[1])
-      cipherParts = [temp, cipherParts[0]]
+      [left, right] = this.makeRound(left, right, keyParts[i]);
     }
 
-    const binaryResult = cipherParts[0] + cipherParts[1]
-    const decipheredText = binaryToText(binaryResult)
-
-    return decipheredText
+    return this.sumAndConvertToText(left, right)
   }
 }
