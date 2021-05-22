@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Main.scss';
 import { Input, Button, Card, InputNumber } from 'antd';
-import Cipher from '../Cipher/Cipher'
+import Feistel from '../../Cipher/Feistel'
 import TextArea from '../TextArea/TextArea'
 import SessionManager from '../../Utils/SessionManager'
 import openNotification from '../Notification/Notification'
@@ -14,14 +14,14 @@ function Main() {
   const [rounds, setRounds] = useState(null);
 
   const encipher = (inputValue) => {
-    const cipher = new Cipher(key, rounds)
+    const cipher = new Feistel(key, rounds)
     const encryptedValue = cipher.encrypt(inputValue);
     setKey(cipher.getKey())
     setOutputText(encryptedValue)
   }
 
   const decipher = (inputValue) => {
-    const cipher = new Cipher(key, rounds)
+    const cipher = new Feistel(key, rounds)
     const decipherValue = cipher.decrypt(inputValue)
     setOutputText(decipherValue)
   }

@@ -1,9 +1,9 @@
-import { generateKey, checkLenghtAndFix } from '../../Utils/KeyGenerator'
-import { xor } from "../../Utils/XOR"
-import { textToBinary, binaryToText } from "../../Utils/Converters"
+import { generateKey } from '../Utils/KeyGenerator'
+import { xor } from "../Utils/XOR"
+import { textToBinary, binaryToText } from "../Utils/Converters"
 import { encode, decode } from 'js-base64';
 
-export default class Cipher {
+export default class Feistel {
   constructor(key, rounds) {
     this.key = key
     this.rounds = rounds
