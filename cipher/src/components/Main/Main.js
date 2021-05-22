@@ -4,7 +4,7 @@ import { Input, Button, Card, InputNumber } from 'antd';
 import Cipher from '../Cipher/Cipher'
 import TextArea from '../TextArea/TextArea'
 import SessionManager from '../../Utils/SessionManager'
-// const { TextArea } = Input;
+import openNotification from '../Notification/Notification'
 
 function Main() {
 
@@ -28,14 +28,14 @@ function Main() {
 
   const checkAndExecute = (func) => {
     if (!SessionManager.isAuthenticated) {
-      console.error('Please log in')
+      openNotification("Please log in first! You can do that, by refreshing the page")
       return;
     }
 
     if (inputText) {
       func()
     } else {
-      console.error('You need some input in order to do that')
+      openNotification('You need some input in order to do that')
     }
   }
 

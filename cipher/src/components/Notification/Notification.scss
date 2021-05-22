@@ -1,0 +1,14 @@
+@import "../../Utils//Variables.scss";
+
+.ant-notification-notice{
+  background-color: $background-color-header;
+  color: $font-color;
+
+  svg {
+    fill: $font-color;
+  }
+}
+
+.ant-notification-notice-message {
+  color: $font-color;
+}

@@ -8,7 +8,6 @@ function Header() {
       <p>Encryption Tool</p>
       <p>An encryption utility implementing Feistel Cipher</p>
     </header>
-    
   );
 }
  

@@ -1,3 +1,8 @@
+$font-color:rgb(197, 200, 198);
+$background-color-header: #353634;
+$background-color-input: #1D1F21;
+$border-props: 1px solid #4f504d;
+
 .login-overlay {
   width: 100%;
   height: 100%;
@@ -7,8 +12,63 @@
   position: absolute;
   background-color: rgba(255, 255, 255, 0.356);
   z-index: 2;
-}
 
-.login-overlay {
+  .login-container{
+    position: relative;
+    bottom: 18%;
+    width: 30%;
+    background-color: $background-color-header;
+    min-height: 150px;
+    max-height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    
 
+    label {
+      color: $font-color
+    }
+
+    .login-container__label{
+      justify-content: center;
+      display: flex;
+      color: $font-color;
+      font-weight: 400;
+      font-size: 2em;
+      margin-top: 10px;
+    }
+
+    .login-overlay__buttons{
+      display: flex;
+      justify-content: space-evenly;
+
+      .login-overlay__buttons--login, .login-overlay__buttons--guest{
+        border: none;
+        color: #24292e;
+        transition: transform .2s;
+        background-color: #eeda7c;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .login-overlay__buttons--login:hover, .login-overlay__buttons--guest:hover{
+        transform: scale(1.05);
+      }
+    }
+
+    .ant-input-password{
+      background-color: $background-color-input;
+      border:$border-props;
+
+      svg {
+        fill: $font-color;
+      }
+    }
+
+    .ant-input{
+      background-color: $background-color-input;
+      color: $font-color;
+    }
+  }
 }

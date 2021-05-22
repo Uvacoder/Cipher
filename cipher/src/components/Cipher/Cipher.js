@@ -1,4 +1,3 @@
-import { split } from '../../Utils/StringActions'
 import { generateKey, checkLenghtAndFix } from '../../Utils/KeyGenerator'
 import { xor } from "../../Utils/XOR"
 import { textToBinary, binaryToText } from "../../Utils/Converters"
