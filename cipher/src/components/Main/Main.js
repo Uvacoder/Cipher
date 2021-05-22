@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import './Main.scss';
-import { Input, Button, Card } from 'antd';
+import { Input, Button, Card, InputNumber } from 'antd';
 import Cipher from '../Cipher/Cipher'
-
-const { TextArea } = Input;
+import TextArea from '../TextArea/TextArea'
+// const { TextArea } = Input;
 
 function Main() {
 
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [key, setKey] = useState("");
+  const [rounds, setRounds] = useState(null);
 
   const encipher = (inputValue) => {
-    const cipher = new Cipher(key)
+    const cipher = new Cipher(key, rounds)
     const encryptedValue = cipher.encrypt(inputValue);
     setKey(cipher.getKey())
     setOutputText(encryptedValue)
   }
 
   const decipher = (inputValue) => {
-    const cipher = new Cipher(key)
+    const cipher = new Cipher(key, rounds)
     const decipherValue = cipher.decrypt(inputValue)
     setOutputText(decipherValue)
   }
@@ -32,9 +33,8 @@ function Main() {
     <main className="main">
       <Card title="Input" className="main__input">
         <TextArea 
-          bordered={false} 
-          autoSize={false}
-          onChange={e => setInputText(e.target.value)}
+          value={inputText}
+          onChange={value => setInputText(value)}
         />
       </Card>
       <div className="main__buttons">
@@ -55,21 +55,31 @@ function Main() {
       </div>
       <Card title="Output" className="main__output">
         <TextArea 
-          bordered={false} 
-          autoSize={false}
-          readOnly={true}
+          readOnly={ true }
           value={ outputText }
         />
       </Card>
-      <div className="main__key">
-        <Input 
-          addonBefore="Key:" 
-          placeholder="Insert your key in order to decode" 
-          value={ key || ''}
-          onChange={e => {
-            setKey(e.target.value)
-          }}
-        />
+      <div className="main__properties"> 
+        <div className="main__properties--key">
+          <Input 
+            addonBefore="Key:" 
+            placeholder="Insert your key or we will generate in for you" 
+            value={ key || ''}
+            onChange={e => {
+              setKey(e.target.value)
+            }}
+          />
+        </div>
+        <div className="main__properties--rounds">
+          <div className="main__properties--rounds-addon">Rounds:</div>
+          <InputNumber 
+            min={2}
+            max={100}
+            defaultValue={2}
+            value={ rounds }
+            onChange={e => {setRounds(e)}}
+          />
+        </div>
       </div>
     </main>
   );

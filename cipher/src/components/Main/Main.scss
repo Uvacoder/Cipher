@@ -60,24 +60,58 @@ $border-props: 1px solid #4f504d;
     }
   }
 
-  .main__key {
+  .main__properties {
     grid-column-start: 1;
     grid-column-end: 4;
     align-self: center;
     width: 70%;
     justify-self: center;
-    border: $border-props;
 
-    .ant-input-group-addon{
-      background-color: $background-color-header;
-      border: none;
-      color: $font-color;
+    .main__properties--key{
+      border: $border-props;
+      margin-bottom: 5px;
+
+      .ant-input-group-addon{
+        background-color: $background-color-header;
+        border: none;
+        color: $font-color;
+        width: 60px;
+      }
+            
+      .ant-input{
+        background: $background-color-input;
+        border: none;
+        color: $font-color;
+      }
     }
-          
-    .ant-input{
-      background: $background-color-input;
-      border: none;
-      color: $font-color;
+
+    .main__properties--rounds {
+      display:flex;
+      border: $border-props;
+
+      .main__properties--rounds-addon {
+        background-color: $background-color-header;
+        min-width: 60px;
+        justify-self: center;
+        align-self: center;
+        color: $font-color;
+      }
+
+      .ant-input-number {
+        background-color: $background-color-input;
+        border: none;
+        width: 100%;
+        color: $font-color;
+      }
+
+      .ant-input-number-handler-wrap{
+        background-color: $background-color-header;
+        border: $border-props;
+      }
+
+      .ant-input-number-handler-down{
+        border-top: $border-props;
+      }
     }
   }
 }

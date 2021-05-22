@@ -2,6 +2,7 @@ import { split } from '../../Utils/StringActions'
 import { generateKey, checkLenghtAndFix } from '../../Utils/KeyGenerator'
 import { xor } from "../../Utils/XOR"
 import { textToBinary, binaryToText } from "../../Utils/Converters"
+import { encode, decode } from 'js-base64';
 
 export default class Cipher {
   constructor(key, rounds) {
@@ -22,7 +23,7 @@ export default class Cipher {
     return [newLeft, newRight]
   }
 
-  divideEvenly(binaryText) {
+  divideEvenly(binaryText, rounds) {
     const half = binaryText.length / 2;
 
     return [binaryText.substr(0, half), binaryText.substr(half)];
@@ -34,10 +35,11 @@ export default class Cipher {
     return binaryToText(binaryResult)
   }
 
-
+  calculateKeyLength(textLenght, rounds) {
+    return (textLenght / 2) * rounds
+  }
 
   encrypt(text) {
-
     const key = generateKey(text.length)
     const binaryData = textToBinary(text)
     const binaryKey = textToBinary(key)
@@ -51,18 +53,15 @@ export default class Cipher {
       [left, right] = this.makeRound(left, right, keyParts[i]);
     }
 
-    
     const cipher = this.sumAndConvertToText(left, right)
-    // const base64Cipher = btoa(cipher)
+    const base64Cipher = encode(cipher)
     
-    return cipher
+    return base64Cipher
   }
 
   decrypt(base64Cipher) {
-
-    // const cipher = atob(base64Cipher)
-    // const cipher = atob(base64Cipher)
-    const binaryCipher = textToBinary(base64Cipher)
+    const cipher = decode(base64Cipher)
+    const binaryCipher = textToBinary(cipher)
     const binaryKey = textToBinary(this.key)
     const keyParts = this.divideEvenly(binaryKey)
     let [left, right] = this.divideEvenly(binaryCipher)
