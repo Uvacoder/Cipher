@@ -85,13 +85,6 @@ const Main = () => {
         />
       </Card>
       <div className="main__properties"> 
-        {/* <div>
-          <Select defaultValue={ TEMP[0] }>
-            {TEMP.map(method => (
-              <Option key={method}>{method}</Option>
-            ))}
-          </Select>
-        </div> */}
         <Selector 
           options={ OPTIONS } 
           onChange={ (value) => setEncryptionOperator(BITWISE_FUNCTIONS[value]) }
