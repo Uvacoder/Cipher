@@ -1,6 +1,6 @@
 import './App.css';
-import MainLayout from './components/Layout/Layout'
-import Login from './components/Login/Login'
+import MainLayout from './Components/Layout/Layout'
+import Login from './Components/Login/Login'
 
 function App() {
   return (
