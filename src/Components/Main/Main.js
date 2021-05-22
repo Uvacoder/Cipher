@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import './Main.scss';
-import { Input, Button, Card, InputNumber } from 'antd';
 import Feistel from '../../Cipher/Feistel'
 import TextArea from '../TextArea/TextArea'
-import SessionManager from '../../Utils/SessionManager'
+import SessionManager from '../../Context/SessionManager'
 import openNotification from '../Notification/Notification'
+import Selector from '../Selector/Selector'
+import { 
+  Input, 
+  Button,
+  Card, 
+  InputNumber
+} from 'antd';
+import BITWISE_FUNCTIONS from '../../Constants/BitwiseFunctions'
 
-function Main() {
+const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
+const MIN_NUMBER_OF_ROUNDS = 2;
+const MAX_NUMBER_OF_ROUNDS = 100;
 
+const cipher = new Feistel()
+
+const Main = () => {
+  // const cipher = useMemo(() => new Feistel(key, rounds), []);
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [key, setKey] = useState("");
   const [rounds, setRounds] = useState(null);
 
+  const setEncryptionOperator = (operator) => {
+    cipher.setEncryptionOperator(operator)
+  }
+
   const encipher = (inputValue) => {
-    const cipher = new Feistel(key, rounds)
+    // const cipher = new Feistel(key, rounds)
     const encryptedValue = cipher.encrypt(inputValue);
     setKey(cipher.getKey())
     setOutputText(encryptedValue)
   }
 
   const decipher = (inputValue) => {
-    const cipher = new Feistel(key, rounds)
+    // const cipher = new Feistel(key, rounds)
     const decipherValue = cipher.decrypt(inputValue)
     setOutputText(decipherValue)
   }
@@ -49,15 +66,13 @@ function Main() {
       </Card>
       <div className="main__buttons">
         <Button 
-          className="main__buttons--encode" 
-          type="primary"
+          className="main__buttons-encode" 
           onClick={() => checkAndExecute(() => encipher(inputText))}
         >
           Encode
         </Button>
         <Button 
-          className="main__buttons--decode" 
-          type="primary"
+          className="main__buttons-decode" 
           onClick={() => checkAndExecute(() => decipher(inputText))}
         >
           Decode
@@ -70,7 +85,19 @@ function Main() {
         />
       </Card>
       <div className="main__properties"> 
-        <div className="main__properties--key">
+        {/* <div>
+          <Select defaultValue={ TEMP[0] }>
+            {TEMP.map(method => (
+              <Option key={method}>{method}</Option>
+            ))}
+          </Select>
+        </div> */}
+        <Selector 
+          options={ OPTIONS } 
+          onChange={ (value) => setEncryptionOperator(BITWISE_FUNCTIONS[value]) }
+          defaultValue = { OPTIONS[0] }
+        />
+        <div className="main__properties-key">
           <Input 
             addonBefore="Key:" 
             placeholder="Insert your key or we will generate in for you" 
@@ -80,12 +107,12 @@ function Main() {
             }}
           />
         </div>
-        <div className="main__properties--rounds">
-          <div className="main__properties--rounds-addon">Rounds:</div>
+        <div className="main__properties-rounds">
+          <div className="main__properties-rounds-addon">Rounds:</div>
           <InputNumber 
-            min={2}
-            max={100}
-            defaultValue={2}
+            min={ MIN_NUMBER_OF_ROUNDS }
+            max={ MAX_NUMBER_OF_ROUNDS }
+            defaultValue={ MIN_NUMBER_OF_ROUNDS }
             value={ rounds }
             onChange={e => {setRounds(e)}}
           />

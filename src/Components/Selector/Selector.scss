@@ -1,0 +1,51 @@
+@import "../../Constants/Constants.scss";
+
+.main__properties-selector{
+  display:flex;
+  border: $border-props;
+  margin-bottom: 5px;
+
+  .main__properties-selector-label{
+    background-color: $background-color-header;
+    min-width: 180px;
+    justify-self: center;
+    align-self: center;
+    color: $font-color;
+
+  }
+
+  .ant-select-arrow {
+    color: $font-color;
+}
+
+  .ant-select{
+    width: 100%;
+
+    .ant-select-selector{
+      background-color: $background-color-input;
+      border: none;
+      color: $font-color;
+    }
+
+    .ant-select-selection-item::after{
+      color: wheat;
+    }
+  }
+}
+
+.main__properties-selector--dropdown{
+  background-color: $background-color-header;
+  border: $border-props;
+  
+  .ant-select-item {
+    color: $font-color;
+  }
+  .ant-select-item-option-selected {
+    background-color: $background-color-input;
+  }
+
+  .ant-select-item-option:hover {
+    background-color: #eeda7c;
+    color: #24292e;
+  }
+}

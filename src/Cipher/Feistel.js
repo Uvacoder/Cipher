@@ -1,5 +1,5 @@
 import { generateKey } from '../Utils/KeyGenerator'
-import { xor } from "../Utils/XOR"
+import { getBitWiseFunc } from "../Utils/XOR"
 import { textToBinary, binaryToText } from "../Utils/Converters"
 import { encode, decode } from 'js-base64';
 
@@ -7,18 +7,24 @@ export default class Feistel {
   constructor(key, rounds) {
     this.key = key
     this.rounds = rounds
-    this.encryptionFunction = xor
+    this.encryptionFunction = getBitWiseFunc((a,b) => a ^ b)
+    this.xor = getBitWiseFunc((a,b) => a ^ b)
   }
-  
+
   getKey() {
     return this.key;
   }
 
+  setEncryptionOperator(operator) {
+    this.encryptionFunction = getBitWiseFunc(operator)
+    console.log(operator)
+  }
+
   makeRound(left, right, key) {
     const functionResult = this.encryptionFunction(right, key);
-    const newRight = xor(functionResult, left);
+    const newRight = this.xor(functionResult, left);
     const newLeft = right;
-
+    console.log(this.encryptionFunction)
     return [newLeft, newRight]
   }
 

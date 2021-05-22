@@ -6,7 +6,7 @@ import {
   Input, 
   Button, 
 } from 'antd';
-import SessionManager from '../../Utils/SessionManager'
+import SessionManager from '../../Context/SessionManager'
 
 const Login = () => {
   
@@ -57,11 +57,11 @@ const Login = () => {
   const renderLogInButton  = () => {
     return (
       <Form.Item >
-        <div className='login-overlay__buttons'>
+        <div className='login-container__buttons'>
           <Button 
             type="primary" 
             htmlType="submit"
-            className='login-overlay__buttons--login'
+            className='login-container__buttons--login'
           >
             Sign In
           </Button>

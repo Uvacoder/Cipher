@@ -2,7 +2,7 @@
 
 .main{
   display: grid;
-  grid-template-columns: 3fr 1.5fr 3fr;
+  grid-template-columns: 3fr 1fr 3fr;
   grid-template-rows: 5fr 1fr;
   grid-gap: 1em;
 
@@ -12,7 +12,7 @@
     justify-content: center;
     align-items: center;
 
-    .main__buttons--encode, .main__buttons--decode{
+    .main__buttons-encode, .main__buttons-decode{
       border-radius: 8px;
       font-size: 1.1em;
       border: none;
@@ -24,7 +24,7 @@
       background-color: #eeda7c;
     }
 
-    .main__buttons--encode:hover, .main__buttons--decode:hover{
+    .main__buttons-encode:hover, .main__buttons-decode:hover{
       transform: scale(1.05);
     }
   }
@@ -64,7 +64,7 @@
     width: 70%;
     justify-self: center;
 
-    .main__properties--key{
+    .main__properties-key{
       border: $border-props;
       margin-bottom: 5px;
 
@@ -82,11 +82,11 @@
       }
     }
 
-    .main__properties--rounds {
+    .main__properties-rounds {
       display:flex;
       border: $border-props;
 
-      .main__properties--rounds-addon {
+      .main__properties-rounds-addon {
         background-color: $background-color-header;
         min-width: 60px;
         justify-self: center;

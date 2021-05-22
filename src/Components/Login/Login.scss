@@ -36,11 +36,11 @@
       margin-top: 10px;
     }
 
-    .login-overlay__buttons{
+    .login-container__buttons{
       display: flex;
       justify-content: space-evenly;
 
-      .login-overlay__buttons--login, .login-overlay__buttons--guest{
+      .login-container__buttons--login {
         border: none;
         color: #24292e;
         transition: transform .2s;
@@ -49,7 +49,7 @@
         margin-top: 10px;
       }
 
-      .login-overlay__buttons--login:hover, .login-overlay__buttons--guest:hover{
+      .login-container__buttons--login:hover{
         transform: scale(1.05);
       }
     }

@@ -1,3 +1,3 @@
-export const xor = (string1, string2) => {
-  return Array.from(string1).map((c, idx) => (c ^ string2[idx])).join('')
+export const getBitWiseFunc = (operator) => {
+  return (string1, string2) => Array.from(string1).map((c, idx) => operator(c, string2[idx])).join('')
 }
