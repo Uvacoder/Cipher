@@ -3,6 +3,7 @@ import './Main.scss';
 import { Input, Button, Card, InputNumber } from 'antd';
 import Cipher from '../Cipher/Cipher'
 import TextArea from '../TextArea/TextArea'
+import SessionManager from '../../Utils/SessionManager'
 // const { TextArea } = Input;
 
 function Main() {
@@ -26,7 +27,16 @@ function Main() {
   }
 
   const checkAndExecute = (func) => {
-    inputText ? func() : console.error('You need some input in order to do that')
+    if (!SessionManager.isAuthenticated) {
+      console.error('Please log in')
+      return;
+    }
+
+    if (inputText) {
+      func()
+    } else {
+      console.error('You need some input in order to do that')
+    }
   }
 
   return (

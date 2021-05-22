@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input } from 'antd';
+import { enableTabulatorInTextArea } from '../../Utils/InputHelpers';
 
 const { TextArea: AntdTextArea } = Input;
 
 const TextArea = (props) => {
+  const textAreaRef = useRef(null);
+  
+  useEffect(() => {
+    const nativeTextArea = textAreaRef.current.resizableTextArea.textArea;
+    enableTabulatorInTextArea(nativeTextArea);
+  }, [])
 
   const {
     bordered,
@@ -15,6 +22,7 @@ const TextArea = (props) => {
 
   return (
     <AntdTextArea
+      ref={textAreaRef}
       bordered={ bordered } 
       autoSize={ autoSize }
       readOnly={ readOnly }
