@@ -1,6 +1,7 @@
 import { getBitWiseFunc } from "../Utils/BitwiseFunction"
 import { sha256 } from 'js-sha256';
-import { textToBinary,
+import { 
+  textToBinary,
   binaryToText, 
   decimalToBinary, 
   UTF16ToBase64, 

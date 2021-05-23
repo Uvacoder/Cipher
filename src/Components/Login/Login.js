@@ -96,7 +96,7 @@ const Login = () => {
 
   return ReactDOM.createPortal(
     renderPopup(),
-    document.getElementById('root')
+    document.body
   );
 }
 

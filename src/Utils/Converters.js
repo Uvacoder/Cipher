@@ -54,7 +54,9 @@ export const binaryToText = (binaryInput, bits) => {
 
 /**
  * convert a Unicode string to a string in which
- * each 16-bit unit occupies only one byte
+ * each 16-bit unit occupies only one byte<br>
+ * Code from Mozilla<br>
+ * {@link https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa?fbclid=IwAR2FhZPn4vEIK4iComCdQaLkN-pyvDvu1QG3hlKDZYIrs-gMrGPnXsTjD9A}
  * @category Utils
  * @method
  * @param {String} string Unciode string 
@@ -69,7 +71,9 @@ export const unicodeTo8BitBinary = (string) => {
 }
 
 /**
- * conver 8 Bit binary string to Unicode string
+ * conver 8 Bit binary string to Unicode string<br>
+ * Code from Mozilla<br>
+ * {@link https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa?fbclid=IwAR2FhZPn4vEIK4iComCdQaLkN-pyvDvu1QG3hlKDZYIrs-gMrGPnXsTjD9A}
  * @category Utils
  * @method
  * @param {String} binary string of binary chars
@@ -106,3 +110,5 @@ export const base64ToUTF16 = (base64) => {
   const decoded = atob(base64);
   return from8BitBinaryToUnicode(decoded);
 }
+
+window.base64ToUTF16 = base64ToUTF16

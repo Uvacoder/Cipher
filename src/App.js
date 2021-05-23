@@ -10,10 +10,10 @@ import Login from './Components/Login/Login'
 function App() {
   return (
     <>
-      <Login />
       <div className="App">
         <MainLayout />
       </div>
+      <Login />
     </>
   );
 }

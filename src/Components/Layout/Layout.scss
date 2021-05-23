@@ -1,6 +1,8 @@
+@import "../../Constants/Constants.scss";
+
 .app-layout {
   height: 100%;
-  min-height: 700px;
+  min-height: $min-app-height;
   background:linear-gradient(to right,#252525, #3b3c38, #252525);
   background-size: cover;
   background-repeat: no-repeat;
@@ -10,7 +12,7 @@
 
   .app-layout__container{
     grid-template-rows: 1fr minmax(400px, 10fr) 1fr;
-    min-height: 700px;
+    min-height: $min-app-height;
     height: 100%;
     width: 60%;
     min-width: 515px;
