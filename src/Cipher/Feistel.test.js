@@ -3,7 +3,7 @@ import Feistel from './Feistel';
 let algorithm;
 
 beforeEach(() => {
-  algorithm = new Feistel('generic_key', 8);
+  algorithm = new Feistel(8, 'generic_key');
 });
 
 test('Feistel - test', () => {

@@ -16,6 +16,7 @@ import { generateKey } from '../../Utils/KeyGenerator'
 
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;
+const DEFAULT_NUMBER_OF_ROUNDS = 8;
 const MAX_NUMBER_OF_ROUNDS = 1000;
 
 /**
@@ -24,11 +25,11 @@ const MAX_NUMBER_OF_ROUNDS = 1000;
  */
 const Main = () => {
  
-  const cipher = useMemo(() => new Feistel(), []);
+  const cipher = useMemo(() => new Feistel(DEFAULT_NUMBER_OF_ROUNDS), []);
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [key, setKey] = useState("");
-  const [rounds, setRounds] = useState(MIN_NUMBER_OF_ROUNDS);
+  const [rounds, setRounds] = useState(DEFAULT_NUMBER_OF_ROUNDS);
   const setEncryptionOperator = (operator) => {
     cipher.setEncryptionOperator(operator)
   }

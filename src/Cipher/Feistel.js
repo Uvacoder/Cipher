@@ -34,7 +34,7 @@ class Feistel {
    * @param {String} key Main encrypting key 
    * @param {Number} rounds Number of encryption rounds
    */
-  constructor(key = DEFAULT_KEY, rounds = DEFAULT_ROUND_NO) {
+  constructor(rounds = DEFAULT_ROUND_NO, key = DEFAULT_KEY) {
     this.setKey(key)
     this.rounds = rounds
     this.encryptionFunction = getBitWiseFunc((a,b) => a ^ b)
@@ -221,12 +221,3 @@ class Feistel {
 }
 
 export default Feistel;
-
-const algo = new Feistel()
-window.hashKey = algo.hashKey;
-window.getSubKey = algo.getSubKey;
-window.divideEvenly = algo.divideEvenly;
-window.makeRound = algo.makeRound;
-window.processSingleBlock = algo.processSingleBlock
-window.process = algo.process
-window.divideIntoBlocks = algo.divideIntoBlocks
