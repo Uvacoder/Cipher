@@ -8,14 +8,17 @@ const CHAR_NO_OF_BITS = 16; // UTF-16 number of bits to each sign
 const PADDING_CHARACTER = '\u0003' // Unicode 'End of Text'
 const BLOCK_SIZE = 128; // bit size of block DO NOT CHANGE!!!
 const KEY_SIZE = 64; 
+const DEFAULT_ROUND_NO = 8;
+const DEFAULT_KEY = "Feistel Cipher";
 const MODES = {
   ENCRYPT: 'encrypt',
   DECRYPT: 'decrypt'
 }
 export default class Feistel {
-  constructor(key, rounds) {
-    this.key = key
-    this.masterKey = this.hashKey(key)
+  constructor(key = DEFAULT_KEY, rounds = DEFAULT_ROUND_NO) {
+    this.setKey(key)
+    // this.key = key
+    // this.masterKey = this.hashKey(key)
     this.rounds = rounds
     this.encryptionFunction = getBitWiseFunc((a,b) => a ^ b)
     this.xor = getBitWiseFunc((a,b) => a ^ b)
@@ -39,6 +42,15 @@ export default class Feistel {
     const half = binaryText.length / 2;
 
     return [binaryText.substr(0, half), binaryText.substr(half)];
+  }
+
+  setKey(key) {
+    this.key = key;
+    this.masterKey = this.hashKey(key);
+  }
+  
+  setRounds(rounds) {
+    this.rounds = rounds;
   }
 
   getKey() {

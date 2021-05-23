@@ -1,7 +1,5 @@
-// TODO change names to 16bit
-// todo change ascii to utf16
 
-export const textToAsciiArray = (text) => {
+export const textToUnicodeDecimalArray = (text) => {
   return text.split('').map(letter => letter.charCodeAt(0))
 }
 
@@ -12,23 +10,15 @@ export const decimalToBinary = (decimal, bits) => {
 }
 
 export const textToBinary = (textInput, bits) => {
-  // return (
-  //   Array
-  //     .from(textInput)
-  //     .reduce((acc, char) => acc.concat(char.charCodeAt().toString(2)), [])
-  //     .map(bin => '0'.repeat(bits - bin.length) + bin )
-  //     .join('')
-  // );
-  const asciiArray = textToAsciiArray(textInput);
+  const unicodeArray = textToUnicodeDecimalArray(textInput);
 
-  return asciiArray.map(value => decimalToBinary(value, bits)).join('');
+  return unicodeArray.map(value => decimalToBinary(value, bits)).join('');
 }
 
 export const binaryToText = (binaryInput, bits) => {
   const regex = new RegExp(`.{1,${bits}}`, 'g');
 
   return binaryInput.match(regex).map((el) => String.fromCharCode((parseInt(el, 2)))).join('')
-  // return binaryInput.match(/.{1,16}/g).map((el) => String.fromCharCode((parseInt(el, 2)))).join('')
 }
 
 // convert a Unicode string to a string in which

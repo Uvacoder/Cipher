@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+/**
+ * Feistel Cipher implementation.
+ * Created by Patryk Bura
+ * May 2021
+ */
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-
+/**
+ * 
+ * @returns Random master key
+ */
 export const generateKey = () => {
-  const k = uuidv4()
-  console.log(k)
-  return k;
+  return uuidv4()
 }

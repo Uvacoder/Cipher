@@ -17,23 +17,23 @@ import { generateKey } from '../../Utils/KeyGenerator'
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;
 const MAX_NUMBER_OF_ROUNDS = 999;
-const DEFUALT_KEY = generateKey()
+// const DEFUALT_KEY = generateKey()
 
 const Main = () => {
  
-  // const cipher = useMemo(() => new Feistel(key, rounds), []);
+  const cipher = useMemo(() => new Feistel(), []);
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
-  const [key, setKey] = useState(DEFUALT_KEY);
-  const [rounds, setRounds] = useState(null);
-  let cipher = new Feistel(key, rounds)
+  const [key, setKey] = useState("");
+  const [rounds, setRounds] = useState(MIN_NUMBER_OF_ROUNDS);
+  // let cipher = new Feistel(key, rounds)
   const setEncryptionOperator = (operator) => {
     cipher.setEncryptionOperator(operator)
   }
 
-  useEffect(() => {
-    cipher = new Feistel(key, rounds)
-  },[key])
+  // useEffect(() => {
+  //   cipher = new Feistel(key, rounds)
+  // },[key])
 
   const encipher = (inputValue) => {
     // const cipher = new Feistel(key, rounds)
@@ -49,12 +49,28 @@ const Main = () => {
   }
 
   const checkAndExecute = (func) => {
+    // let isValid = true;
+
     if (!SessionManager.isAuthenticated) {
       openNotification("Please log in first! You can do that, by refreshing the page")
       return;
     }
 
-    if (inputText) {
+    // if (!inputText.length) {
+    //   isValid = false;
+    //   openNotification('You need some input in order to do that')
+    // }
+
+    // if (!key.length) {
+
+    // }
+    if (!key.length) {
+      const key = generateKey();
+      setKey(key);
+      cipher.setKey(key);
+    }
+
+    if (inputText.length) {
       func()
     } else {
       openNotification('You need some input in order to do that')
@@ -74,13 +90,13 @@ const Main = () => {
           className="main__buttons-encode" 
           onClick={() => checkAndExecute(() => encipher(inputText))}
         >
-          Encode
+          Encrypt
         </Button>
         <Button 
           className="main__buttons-decode" 
           onClick={() => checkAndExecute(() => decipher(inputText))}
         >
-          Decode
+          Decrypt
         </Button>
       </div>
       <Card title="Output" className="main__output">
@@ -105,6 +121,7 @@ const Main = () => {
               setKey(e.target.value)
               //feistel set target key
             }}
+            onBlur={() => cipher.setKey(key)}
           />
         </div>
         <div className="main__properties-rounds">
@@ -112,9 +129,12 @@ const Main = () => {
           <InputNumber 
             min={ MIN_NUMBER_OF_ROUNDS }
             max={ MAX_NUMBER_OF_ROUNDS }
-            defaultValue={ MIN_NUMBER_OF_ROUNDS }
+            // defaultValue={ MIN_NUMBER_OF_ROUNDS }
             value={ rounds }
-            onChange={e => {setRounds(e)}}
+            onChange={value => {
+              setRounds(value)
+              cipher.setRounds(value)
+            }}
           />
         </div>
       </div>

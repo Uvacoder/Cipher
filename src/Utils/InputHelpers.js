@@ -1,3 +1,8 @@
+/**
+ * Utility to enable using tabulators in text areas
+ * 
+ * @param {TextArea} textArea Any text area
+ */
 export const enableTabulatorInTextArea = (textArea) => {
   textArea.addEventListener('keydown', function(e) {
     if (e.key == 'Tab') {
