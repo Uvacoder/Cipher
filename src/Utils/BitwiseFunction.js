@@ -1,5 +1,7 @@
 /**
  * Util returning function that uses bitwise operators
+ * @category Utils
+ * @method
  * @param {Function} operator Encrypting function definition
  * @returns Encrypting function
  */

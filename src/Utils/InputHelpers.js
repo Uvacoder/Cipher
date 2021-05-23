@@ -1,6 +1,6 @@
 /**
  * Utility to enable using tabulators in text areas
- * 
+ * @category Utils
  * @param {TextArea} textArea Any text area
  */
 export const enableTabulatorInTextArea = (textArea) => {

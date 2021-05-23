@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Utils/Converters.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Encryption tool</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Feistel.html">Feistel</a></li><li><a href="SessionManager.html">SessionManager</a></li></ul><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="TextArea.html">TextArea</a></li></ul></div><div class="category"><h2>Constants</h2><h3>Global</h3><ul><li><a href="global.html#BITWISE_FUNCTIONS">BITWISE_FUNCTIONS</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Global</h3><ul><li><a href="global.html#base64ToUTF16">base64ToUTF16</a></li><li><a href="global.html#binaryToText">binaryToText</a></li><li><a href="global.html#decimalToBinary">decimalToBinary</a></li><li><a href="global.html#enableTabulatorInTextArea">enableTabulatorInTextArea</a></li><li><a href="global.html#from8BitBinaryToUnicode">from8BitBinaryToUnicode</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getBitWiseFunc">getBitWiseFunc</a></li><li><a href="global.html#textToBinary">textToBinary</a></li><li><a href="global.html#textToUnicodeDecimalArray">textToUnicodeDecimalArray</a></li><li><a href="global.html#unicodeTo8BitBinary">unicodeTo8BitBinary</a></li><li><a href="global.html#UTF16ToBase64">UTF16ToBase64</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>Utils/Converters.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Creates array of unicodes from passed in text
+ * @category Utils
+ * @method
+ * @param {String} text 
+ * @returns Array of Unicodes
+ */
+export const textToUnicodeDecimalArray = (text) => {
+  return text.split('').map(letter => letter.charCodeAt(0))
+}
+
+/**
+ * Decimal number to binary representation in string converter
+ * @category Utils
+ * @method
+ * @param {Number} decimal 
+ * @param {Number} bits Bit format
+ * @returns Binary string representing decimal
+ */
+export const decimalToBinary = (decimal, bits) => {
+  const binary = decimal.toString(2);
+
+  return '0'.repeat(bits - binary.length) + binary;
+}
+
+/**
+ * Text to binary represented in string converter
+ * @category Utils
+ * @method
+ * @param {String} textInput 
+ * @param {Number} bits Bit format
+ * @returns Binary representation of text in string
+ */
+export const textToBinary = (textInput, bits) => {
+  const unicodeArray = textToUnicodeDecimalArray(textInput);
+
+  return unicodeArray.map(value => decimalToBinary(value, bits)).join('');
+}
+
+/**
+ * Converts binary input to readable text
+ * @category Utils
+ * @method
+ * @param {String} binaryInput String of 0s &amp; 1s
+ * @param {Number} bits Bit format
+ * @returns Readable string
+ */
+export const binaryToText = (binaryInput, bits) => {
+  const regex = new RegExp(`.{1,${bits}}`, 'g');
+
+  return binaryInput.match(regex).map((el) => String.fromCharCode((parseInt(el, 2)))).join('')
+}
+
+
+/**
+ * convert a Unicode string to a string in which
+ * each 16-bit unit occupies only one byte
+ * @category Utils
+ * @method
+ * @param {String} string Unciode string 
+ * @returns 8 Bit binary string
+ */
+export const unicodeTo8BitBinary = (string) => {
+  const codeUnits = new Uint16Array(string.length);
+  for (let i = 0; i &lt; codeUnits.length; i++) {
+    codeUnits[i] = string.charCodeAt(i);
+  }
+  return String.fromCharCode(...new Uint8Array(codeUnits.buffer));
+}
+
+/**
+ * conver 8 Bit binary string to Unicode string
+ * @category Utils
+ * @method
+ * @param {String} binary string of binary chars
+ * @returns unicode string
+ */
+export const from8BitBinaryToUnicode = (binary) => {
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i &lt; bytes.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return String.fromCharCode(...new Uint16Array(bytes.buffer));
+}
+
+/**
+ * Convert UTF16 to Base64
+ * @category Utils
+ * @method
+ * @param {String} utf16 String in UTF16 format
+ * @returns String in Base64 format
+ */
+export const UTF16ToBase64 = (utf16) => {
+  const converted = unicodeTo8BitBinary(utf16);
+  return btoa(converted);
+}
+
+/**
+ * Convert Base64 to UTF16
+ * @category Utils
+ * @method
+ * @param {String} base64 String in Base64 format 
+ * @returns String in Base64 format
+ */
+export const base64ToUTF16 = (base64) => {
+  const decoded = atob(base64);
+  return from8BitBinaryToUnicode(decoded);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 /**
  * Creates array of unicodes from passed in text
+ * @category Utils
  * @method
  * @param {String} text 
  * @returns Array of Unicodes
@@ -10,6 +11,7 @@ export const textToUnicodeDecimalArray = (text) => {
 
 /**
  * Decimal number to binary representation in string converter
+ * @category Utils
  * @method
  * @param {Number} decimal 
  * @param {Number} bits Bit format
@@ -23,6 +25,7 @@ export const decimalToBinary = (decimal, bits) => {
 
 /**
  * Text to binary represented in string converter
+ * @category Utils
  * @method
  * @param {String} textInput 
  * @param {Number} bits Bit format
@@ -36,6 +39,7 @@ export const textToBinary = (textInput, bits) => {
 
 /**
  * Converts binary input to readable text
+ * @category Utils
  * @method
  * @param {String} binaryInput String of 0s & 1s
  * @param {Number} bits Bit format
@@ -51,6 +55,7 @@ export const binaryToText = (binaryInput, bits) => {
 /**
  * convert a Unicode string to a string in which
  * each 16-bit unit occupies only one byte
+ * @category Utils
  * @method
  * @param {String} string Unciode string 
  * @returns 8 Bit binary string
@@ -65,6 +70,7 @@ export const unicodeTo8BitBinary = (string) => {
 
 /**
  * conver 8 Bit binary string to Unicode string
+ * @category Utils
  * @method
  * @param {String} binary string of binary chars
  * @returns unicode string
@@ -79,6 +85,7 @@ export const from8BitBinaryToUnicode = (binary) => {
 
 /**
  * Convert UTF16 to Base64
+ * @category Utils
  * @method
  * @param {String} utf16 String in UTF16 format
  * @returns String in Base64 format
@@ -90,6 +97,7 @@ export const UTF16ToBase64 = (utf16) => {
 
 /**
  * Convert Base64 to UTF16
+ * @category Utils
  * @method
  * @param {String} base64 String in Base64 format 
  * @returns String in Base64 format

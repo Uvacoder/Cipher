@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Cipher/Feistel.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Encryption tool</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Feistel.html">Feistel</a></li><li><a href="SessionManager.html">SessionManager</a></li></ul><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="TextArea.html">TextArea</a></li></ul></div><div class="category"><h2>Constants</h2><h3>Global</h3><ul><li><a href="global.html#BITWISE_FUNCTIONS">BITWISE_FUNCTIONS</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Global</h3><ul><li><a href="global.html#base64ToUTF16">base64ToUTF16</a></li><li><a href="global.html#binaryToText">binaryToText</a></li><li><a href="global.html#decimalToBinary">decimalToBinary</a></li><li><a href="global.html#enableTabulatorInTextArea">enableTabulatorInTextArea</a></li><li><a href="global.html#from8BitBinaryToUnicode">from8BitBinaryToUnicode</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getBitWiseFunc">getBitWiseFunc</a></li><li><a href="global.html#textToBinary">textToBinary</a></li><li><a href="global.html#textToUnicodeDecimalArray">textToUnicodeDecimalArray</a></li><li><a href="global.html#unicodeTo8BitBinary">unicodeTo8BitBinary</a></li><li><a href="global.html#UTF16ToBase64">UTF16ToBase64</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>Cipher/Feistel.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { getBitWiseFunc } from "../Utils/BitwiseFunction"
+import { sha256 } from 'js-sha256';
+import { textToBinary,
+  binaryToText, 
+  decimalToBinary, 
+  UTF16ToBase64, 
+  base64ToUTF16 
+} from "../Utils/Converters"
+
+const CHAR_NO_OF_BITS = 16; // UTF-16 number of bits to each sign
+const PADDING_CHARACTER = '\u0003' // Unicode 'End of Text'
+const BLOCK_SIZE = 128; // Bit size of block
+const KEY_SIZE = 64; // Bit size of key
+const DEFAULT_ROUND_NO = 8; // Default number of encyption process
+const DEFAULT_KEY = "Feistel Cipher"; // Default key - can be any string
+const MODES = {
+  ENCRYPT: 'encrypt',
+  DECRYPT: 'decrypt'
+};
+
+/**
+ * Feistel class is main point in Cipher Application.&lt;br>
+ * This is implementation of Feistel Cipher&lt;br>
+ * It supports all 65535 UTF-16 code points.
+ * Use encrypt() and decrypt() with appropriate text data.&lt;br>
+ * You can read more about it here: 
+ * {@link https://en.wikipedia.org/wiki/Feistel_cipher}
+ */
+class Feistel {
+  /**
+   * Provide key and number of encryption rounds
+   * @constructor
+   * @param {String} key Main encrypting key 
+   * @param {Number} rounds Number of encryption rounds
+   */
+  constructor(key = DEFAULT_KEY, rounds = DEFAULT_ROUND_NO) {
+    this.setKey(key)
+    this.rounds = rounds
+    this.encryptionFunction = getBitWiseFunc((a,b) => a ^ b)
+    this.xor = getBitWiseFunc((a,b) => a ^ b)
+  }
+  
+  /**
+   * Function hashing key to binary
+   * @param {String} key Encrypting key 
+   * @returns Hashed key in binary
+   */
+  hashKey(key) {
+    const noOfBytes = KEY_SIZE / 8;
+    const sha64KeyArray = sha256.array(key).slice(0, noOfBytes);
+
+    return sha64KeyArray.map(value => decimalToBinary(value, 8)).join('');
+  }
+
+  /**
+   * Return key for each iteration
+   * @param {String} masterKey Main key 
+   * @param {Number} iteration Number of current iteration
+   * @returns Sub key based on main key, for each iteration
+   */
+  getSubKey(masterKey, iteration) {
+    return this.hashKey(`${masterKey}${iteration}${iteration ** 37}`);
+  }
+
+  /**
+   * Spliting input in half
+   * @param {String} binaryText Binary input 
+   * @returns Array of strings with two sub-keys
+   */
+  divideEvenly(binaryText) {
+    const half = binaryText.length / 2;
+
+    return [binaryText.substr(0, half), binaryText.substr(half)];
+  }
+
+  setKey(key) {
+    this.key = key;
+    this.masterKey = this.hashKey(key);
+  }
+  
+  setRounds(rounds) {
+    this.rounds = rounds;
+  }
+
+  getKey() {
+    return this.key;
+  }
+
+  setEncryptionOperator(operator) {
+    this.encryptionFunction = getBitWiseFunc(operator)
+  }
+
+  makeRound(left, right, key) {
+    const functionResult = this.encryptionFunction(right, key);
+    const newRight = this.xor(functionResult, left);
+    const newLeft = right;
+
+    return [newLeft, newRight]
+  }
+
+  processSingleBlock(mode, inputBinaryText) {
+    let [left, right] = this.divideEvenly(inputBinaryText);
+
+    for (let i = 0; i &lt; this.rounds; i++) {
+      const subKeyIteration = mode === MODES.ENCRYPT ? i : this.rounds - i - 1;
+      const key = this.getSubKey(this.masterKey, subKeyIteration);
+
+      [left, right] = this.makeRound(left, right, key);
+    } 
+
+    return right + left;
+  }
+
+  process(mode, inputText) {
+    const blocks = this.divideIntoBlocks(inputText);
+    let result = '';
+
+    for (const textBlock of blocks) {  
+      const blockResult = this.processSingleBlock(mode, textToBinary(textBlock, CHAR_NO_OF_BITS))
+      result += binaryToText(blockResult, CHAR_NO_OF_BITS);
+    }
+
+    return result;
+  }
+
+  divideIntoBlocks(text) {
+    const noOfChars = BLOCK_SIZE / CHAR_NO_OF_BITS;
+    const blocks = [];
+
+    for (let i = 0; i &lt; text.length; i+= noOfChars) {
+      const blockText = text.slice(i, i + noOfChars);
+
+      blocks.push(blockText);
+    }
+
+    const lastBlockLength = blocks[blocks.length - 1].length;
+    const requiredPaddingSize = noOfChars - lastBlockLength;
+
+    if (requiredPaddingSize) {
+      const padding = PADDING_CHARACTER.repeat(requiredPaddingSize);
+
+      blocks[blocks.length - 1] += padding;
+    }
+
+    return blocks;
+  }
+
+  encrypt(text) {
+    const cipher = this.process(MODES.ENCRYPT, text);
+
+    return UTF16ToBase64(cipher)
+  }
+
+  decrypt(base64Text) {  
+    const cipher = base64ToUTF16(base64Text)
+    const result = this.process(MODES.DECRYPT, cipher);
+    const paddingIndex = result.indexOf(PADDING_CHARACTER);
+    let decryptedText = null;
+
+    if (paddingIndex === -1) {
+      decryptedText = result;
+    } else {
+      decryptedText = result.slice(0, paddingIndex)
+    }
+
+    return decryptedText
+  }
+}
+
+export default Feistel;</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

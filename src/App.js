@@ -4,6 +4,7 @@ import Login from './Components/Login/Login'
 
 /**
  * Top level JS file
+ * @component
  * @returns Main app components - Login && Layout
  */
 function App() {
