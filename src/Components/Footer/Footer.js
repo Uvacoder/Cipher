@@ -1,6 +1,11 @@
 import React from 'react';
 import './Footer.scss';
- 
+
+/**
+ * Footer component displaying about
+ * @component
+ * @returns Paragraphs with infromations about author and app
+ */
 function Footer() {
  
   return (

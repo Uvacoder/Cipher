@@ -11,7 +11,7 @@ class SessionManager {
 
   /**
    * Autentication method
-   * @param {String} password 
+   * @param {String} password Password given by user
    * @returns Boolean
    */
   authenticate(password) {

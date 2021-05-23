@@ -1,9 +1,15 @@
 import React from 'react';
 import { Select } from 'antd';
 import './Selector.scss'
+import PropTypes from 'prop-types';
 
 const { Option } = Select;
 
+/**
+ * Encrypting function selector
+ * @component
+ * @returns Selector component
+ */
 const Selector = (props) => {
   const {
     options,
@@ -27,6 +33,21 @@ const Selector = (props) => {
       </Select>
     </div>
   )
+}
+
+Selector.propTypes = {
+  /**Array of encoding functions */
+  options: PropTypes.array,
+  /**On change function */
+  onChange: PropTypes.func,
+  /**Default selected value */
+  defaultValue: PropTypes.string
+};
+
+Selector.defaultProps = {
+  options: [],
+  onChange: () => {},
+  defaultValue: ''
 }
 
 export default Selector;

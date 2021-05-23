@@ -1,6 +1,11 @@
 import React from 'react';
 import './Header.scss';
- 
+
+/**
+ * Header component, displaying title and description
+ * @component
+ * @returns Titile and description
+ */
 function Header() {
  
   return (

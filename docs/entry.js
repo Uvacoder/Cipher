@@ -25,5 +25,20 @@
   import Component0 from '../src/App.js';
 reactComponents['App'] = Component0;
 
-import Component1 from '../src/Components/TextArea/TextArea.js';
-reactComponents['TextArea'] = Component1;
+import Component1 from '../src/Components/Footer/Footer.js';
+reactComponents['Footer'] = Component1;
+
+import Component2 from '../src/Components/Header/Header.js';
+reactComponents['Header'] = Component2;
+
+import Component3 from '../src/Components/Login/Login.js';
+reactComponents['Login'] = Component3;
+
+import Component4 from '../src/Components/Layout/Layout.js';
+reactComponents['MainLayout'] = Component4;
+
+import Component5 from '../src/Components/Selector/Selector.js';
+reactComponents['Selector'] = Component5;
+
+import Component6 from '../src/Components/TextArea/TextArea.js';
+reactComponents['TextArea'] = Component6;

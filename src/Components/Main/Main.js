@@ -17,8 +17,11 @@ import { generateKey } from '../../Utils/KeyGenerator'
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;
 const MAX_NUMBER_OF_ROUNDS = 999;
-// const DEFUALT_KEY = generateKey()
 
+/**
+ * Main component, handling state of the application
+ * @returns Input and Output areas, buttons
+ */
 const Main = () => {
  
   const cipher = useMemo(() => new Feistel(), []);
@@ -26,44 +29,27 @@ const Main = () => {
   const [outputText, setOutputText] = useState("");
   const [key, setKey] = useState("");
   const [rounds, setRounds] = useState(MIN_NUMBER_OF_ROUNDS);
-  // let cipher = new Feistel(key, rounds)
   const setEncryptionOperator = (operator) => {
     cipher.setEncryptionOperator(operator)
   }
 
-  // useEffect(() => {
-  //   cipher = new Feistel(key, rounds)
-  // },[key])
-
   const encipher = (inputValue) => {
-    // const cipher = new Feistel(key, rounds)
     const encryptedValue = cipher.encrypt(inputValue);
-    // setKey(cipher.getKey())
     setOutputText(encryptedValue)
   }
 
   const decipher = (inputValue) => {
-    // const cipher = new Feistel(key, rounds)
     const decipherValue = cipher.decrypt(inputValue)
     setOutputText(decipherValue)
   }
 
   const checkAndExecute = (func) => {
-    // let isValid = true;
 
     if (!SessionManager.isAuthenticated) {
       openNotification("Please log in first! You can do that, by refreshing the page")
       return;
     }
 
-    // if (!inputText.length) {
-    //   isValid = false;
-    //   openNotification('You need some input in order to do that')
-    // }
-
-    // if (!key.length) {
-
-    // }
     if (!key.length) {
       const key = generateKey();
       setKey(key);
@@ -115,11 +101,9 @@ const Main = () => {
           <Input 
             addonBefore="Key:" 
             placeholder="Insert your key or we will generate in for you" 
-            // defaultValue="qwertyZAX"
             value={ key }
             onChange={e => {
               setKey(e.target.value)
-              //feistel set target key
             }}
             onBlur={() => cipher.setKey(key)}
           />
@@ -129,7 +113,6 @@ const Main = () => {
           <InputNumber 
             min={ MIN_NUMBER_OF_ROUNDS }
             max={ MAX_NUMBER_OF_ROUNDS }
-            // defaultValue={ MIN_NUMBER_OF_ROUNDS }
             value={ rounds }
             onChange={value => {
               setRounds(value)

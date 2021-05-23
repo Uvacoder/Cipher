@@ -23,7 +23,7 @@ const MODES = {
  * This is implementation of Feistel Cipher<br>
  * It supports all 65535 UTF-16 code points.
  * Use encrypt() and decrypt() with appropriate text data.<br>
- * You can read more about it here: 
+ * You can read more about algorithm here: 
  * {@link https://en.wikipedia.org/wiki/Feistel_cipher}
  */
 class Feistel {
@@ -43,7 +43,7 @@ class Feistel {
   /**
    * Function hashing key to binary
    * @param {String} key Encrypting key 
-   * @returns Hashed key in binary
+   * @returns {String} Hashed key in binary
    */
   hashKey(key) {
     const noOfBytes = KEY_SIZE / 8;
@@ -56,7 +56,7 @@ class Feistel {
    * Return key for each iteration
    * @param {String} masterKey Main key 
    * @param {Number} iteration Number of current iteration
-   * @returns Sub key based on main key, for each iteration
+   * @returns {String} Sub key based on main key, for each iteration
    */
   getSubKey(masterKey, iteration) {
     return this.hashKey(`${masterKey}${iteration}${iteration ** 37}`);
@@ -65,7 +65,7 @@ class Feistel {
   /**
    * Spliting input in half
    * @param {String} binaryText Binary input 
-   * @returns Array of strings with two sub-keys
+   * @returns {Array} Array of strings with two sub-keys
    */
   divideEvenly(binaryText) {
     const half = binaryText.length / 2;
@@ -73,23 +73,46 @@ class Feistel {
     return [binaryText.substr(0, half), binaryText.substr(half)];
   }
 
+  /**
+   * Sets hashed master key
+   * @param {String} key Key provided by user 
+   */
   setKey(key) {
     this.key = key;
     this.masterKey = this.hashKey(key);
   }
   
+  /**
+   * Sets number of rounds choosen by user
+   * @param {Number} rounds 
+   */
   setRounds(rounds) {
     this.rounds = rounds;
   }
 
+  /**
+   * Return current master key
+   * @returns {String} Current master key
+   */
   getKey() {
     return this.key;
   }
 
+  /**
+   * Seting encrypting function
+   * @param {Function} operator Bitwise function
+   */
   setEncryptionOperator(operator) {
     this.encryptionFunction = getBitWiseFunc(operator)
   }
 
+  /**
+   * Function applied at each round of the enciphering process
+   * @param {String} left Left side of divided binary
+   * @param {String} right Right side of divided binary
+   * @param {String} key Enciphering current iteration key 
+   * @returns {Array} Array with right and left side of input text
+   */
   makeRound(left, right, key) {
     const functionResult = this.encryptionFunction(right, key);
     const newRight = this.xor(functionResult, left);
@@ -98,6 +121,13 @@ class Feistel {
     return [newLeft, newRight]
   }
 
+  /**
+   * Encrypting / decrypting single block of text
+   * Single block - 8 letters (128bit / 16bit - one character)
+   * @param {String} mode Process mode - "encrypt" or "decrypt"
+   * @param {String} inputBinaryText Binary notation in string
+   * @returns {String} Encrypted or decrypted text
+   */
   processSingleBlock(mode, inputBinaryText) {
     let [left, right] = this.divideEvenly(inputBinaryText);
 
@@ -111,6 +141,13 @@ class Feistel {
     return right + left;
   }
 
+
+  /**
+   * Core function - splits text into blocks and processes them
+   * @param {String} mode Process mode - "encrypt" or "decrypt"
+   * @param {String} inputText Provided text
+   * @returns {String} Encrypted / decrypted text (with possible padding in decrypted text)
+   */
   process(mode, inputText) {
     const blocks = this.divideIntoBlocks(inputText);
     let result = '';
@@ -123,6 +160,11 @@ class Feistel {
     return result;
   }
 
+  /**
+   * Divides text into equall blocks
+   * @param {String} text Provided text
+   * @returns {Array} Array of strings
+   */
   divideIntoBlocks(text) {
     const noOfChars = BLOCK_SIZE / CHAR_NO_OF_BITS;
     const blocks = [];
@@ -145,12 +187,22 @@ class Feistel {
     return blocks;
   }
 
+  /**
+   * Main encypting function
+   * @param {String} text Provided text
+   * @returns {String} Base64 encrypted string
+   */
   encrypt(text) {
     const cipher = this.process(MODES.ENCRYPT, text);
 
     return UTF16ToBase64(cipher)
   }
 
+  /**
+   * Main decrypting function
+   * @param {String} base64Text Provided Base64 text
+   * @returns {String} UTF16 decrypted text
+   */
   decrypt(base64Text) {  
     const cipher = base64ToUTF16(base64Text)
     const result = this.process(MODES.DECRYPT, cipher);

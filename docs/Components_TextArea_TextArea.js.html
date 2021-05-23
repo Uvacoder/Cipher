@@ -72,7 +72,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Feistel.html">Feistel</a></li><li><a href="SessionManager.html">SessionManager</a></li></ul><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="TextArea.html">TextArea</a></li></ul></div><div class="category"><h2>Constants</h2><h3>Global</h3><ul><li><a href="global.html#BITWISE_FUNCTIONS">BITWISE_FUNCTIONS</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Global</h3><ul><li><a href="global.html#base64ToUTF16">base64ToUTF16</a></li><li><a href="global.html#binaryToText">binaryToText</a></li><li><a href="global.html#decimalToBinary">decimalToBinary</a></li><li><a href="global.html#enableTabulatorInTextArea">enableTabulatorInTextArea</a></li><li><a href="global.html#from8BitBinaryToUnicode">from8BitBinaryToUnicode</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getBitWiseFunc">getBitWiseFunc</a></li><li><a href="global.html#textToBinary">textToBinary</a></li><li><a href="global.html#textToUnicodeDecimalArray">textToUnicodeDecimalArray</a></li><li><a href="global.html#unicodeTo8BitBinary">unicodeTo8BitBinary</a></li><li><a href="global.html#UTF16ToBase64">UTF16ToBase64</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Feistel.html">Feistel</a></li><li><a href="SessionManager.html">SessionManager</a></li></ul><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Login.html">Login</a></li><li><a href="MainLayout.html">MainLayout</a></li><li><a href="Selector.html">Selector</a></li><li><a href="TextArea.html">TextArea</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Main">Main</a></li><li><a href="global.html#openNotification">openNotification</a></li></ul></div><div class="category"><h2>Constants</h2><h3>Global</h3><ul><li><a href="global.html#BITWISE_FUNCTIONS">BITWISE_FUNCTIONS</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Global</h3><ul><li><a href="global.html#base64ToUTF16">base64ToUTF16</a></li><li><a href="global.html#binaryToText">binaryToText</a></li><li><a href="global.html#decimalToBinary">decimalToBinary</a></li><li><a href="global.html#enableTabulatorInTextArea">enableTabulatorInTextArea</a></li><li><a href="global.html#from8BitBinaryToUnicode">from8BitBinaryToUnicode</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getBitWiseFunc">getBitWiseFunc</a></li><li><a href="global.html#textToBinary">textToBinary</a></li><li><a href="global.html#textToUnicodeDecimalArray">textToUnicodeDecimalArray</a></li><li><a href="global.html#unicodeTo8BitBinary">unicodeTo8BitBinary</a></li><li><a href="global.html#UTF16ToBase64">UTF16ToBase64</a></li></ul></div>
                 
             </nav>
         </div>
@@ -130,25 +130,15 @@ const TextArea = (props) => {
 }
 
 TextArea.propTypes = {
-  /**
-   * OnChange callback
-   */
+  /** OnChange callback */
   onChange: PropTypes.func,
-  /**
-   * TextArea value
-   */
+  /** TextArea value */
   value: PropTypes.string,
-  /**
-   * Bordered
-   */
+  /** Bordered */
   bordered: PropTypes.bool,
-  /**
-   * Auto size
-   */
+  /** Auto size */
   autoSize: PropTypes.bool,
-  /**
-   * Read only
-   */
+  /** Read only */
   readOnly: PropTypes.bool
 };
 

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> TextArea</title>
+  <title> Components/Main/Main.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,256 +79,146 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Components</p>
-                    <h1>TextArea</h1>
+                    <p>Source</p>
+                    <h1>Components/Main/Main.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2>
-            &ltTextArea <i>onChange</i> <i>value</i> <i>bordered</i> <i>autoSize</i> <i>readOnly</i> /&gt
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="TextArea">
-        <a class="href-link" href="#TextArea">#</a>
-        
-        <span class="code-name">
-            
-                &ltTextArea <i>onChange</i> <i>value</i> <i>bordered</i> <i>autoSize</i> <i>readOnly</i> /&gt
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        Component rendering text area
-    </div>
-    
-
-
-
-
-
-
-
-    
-        <h5>PropTypes:</h5>
-        
-<div class="table-container">
-  <table class="params table">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Required</th>
-        <th>Description</th>
-        <th class="last">Default</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>onChange</code></td>
-            <td>
-              func
-            </td>
-            <td>No</td>
-            <td>OnChange callback</td>
-            <td>() => {}</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>value</code></td>
-            <td>
-              string
-            </td>
-            <td>No</td>
-            <td>TextArea value</td>
-            <td>null</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>bordered</code></td>
-            <td>
-              bool
-            </td>
-            <td>No</td>
-            <td>Bordered</td>
-            <td>false</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>autoSize</code></td>
-            <td>
-              bool
-            </td>
-            <td>No</td>
-            <td>Auto size</td>
-            <td>false</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>readOnly</code></td>
-            <td>
-              bool
-            </td>
-            <td>No</td>
-            <td>Read only</td>
-            <td>false</td>
-          </tr>
-          
-    
-    </tbody>
-  </table>
-</div>
-    
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="Components_TextArea_TextArea.js.html" class="button">View Source</a>
-            <span>
-                <a href="Components_TextArea_TextArea.js.html">Components/TextArea/TextArea.js</a>, <a href="Components_TextArea_TextArea.js.html#line13">line 13</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>Text Area component</div>
-    
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-        
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useMemo, useEffect } from 'react';
+import './Main.scss';
+import Feistel from '../../Cipher/Feistel'
+import TextArea from '../TextArea/TextArea'
+import SessionManager from '../../Context/SessionManager'
+import openNotification from '../Notification/Notification'
+import Selector from '../Selector/Selector'
+import { 
+  Input, 
+  Button,
+  Card, 
+  InputNumber
+} from 'antd';
+import BITWISE_FUNCTIONS from '../../Constants/BitwiseFunctions'
+import { generateKey } from '../../Utils/KeyGenerator'
+
+const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
+const MIN_NUMBER_OF_ROUNDS = 2;
+const MAX_NUMBER_OF_ROUNDS = 999;
+
+/**
+ * Main component, handling state of the application
+ * @returns Input and Output areas, buttons
+ */
+const Main = () => {
+ 
+  const cipher = useMemo(() => new Feistel(), []);
+  const [inputText, setInputText] = useState("");
+  const [outputText, setOutputText] = useState("");
+  const [key, setKey] = useState("");
+  const [rounds, setRounds] = useState(MIN_NUMBER_OF_ROUNDS);
+  const setEncryptionOperator = (operator) => {
+    cipher.setEncryptionOperator(operator)
+  }
+
+  const encipher = (inputValue) => {
+    const encryptedValue = cipher.encrypt(inputValue);
+    setOutputText(encryptedValue)
+  }
+
+  const decipher = (inputValue) => {
+    const decipherValue = cipher.decrypt(inputValue)
+    setOutputText(decipherValue)
+  }
+
+  const checkAndExecute = (func) => {
+
+    if (!SessionManager.isAuthenticated) {
+      openNotification("Please log in first! You can do that, by refreshing the page")
+      return;
+    }
+
+    if (!key.length) {
+      const key = generateKey();
+      setKey(key);
+      cipher.setKey(key);
+    }
+
+    if (inputText.length) {
+      func()
+    } else {
+      openNotification('You need some input in order to do that')
+    }
+  }
+
+  return (
+    &lt;main className="main">
+      &lt;Card title="Input" className="main__input">
+        &lt;TextArea 
+          value={inputText}
+          onChange={value => setInputText(value)}
+        />
+      &lt;/Card>
+      &lt;div className="main__buttons">
+        &lt;Button 
+          className="main__buttons-encode" 
+          onClick={() => checkAndExecute(() => encipher(inputText))}
+        >
+          Encrypt
+        &lt;/Button>
+        &lt;Button 
+          className="main__buttons-decode" 
+          onClick={() => checkAndExecute(() => decipher(inputText))}
+        >
+          Decrypt
+        &lt;/Button>
+      &lt;/div>
+      &lt;Card title="Output" className="main__output">
+        &lt;TextArea 
+          readOnly={ true }
+          value={ outputText }
+        />
+      &lt;/Card>
+      &lt;div className="main__properties"> 
+        &lt;Selector 
+          options={ OPTIONS } 
+          onChange={ (value) => setEncryptionOperator(BITWISE_FUNCTIONS[value]) }
+          defaultValue = { OPTIONS[0] }
+        />
+        &lt;div className="main__properties-key">
+          &lt;Input 
+            addonBefore="Key:" 
+            placeholder="Insert your key or we will generate in for you" 
+            value={ key }
+            onChange={e => {
+              setKey(e.target.value)
+            }}
+            onBlur={() => cipher.setKey(key)}
+          />
+        &lt;/div>
+        &lt;div className="main__properties-rounds">
+          &lt;div className="main__properties-rounds-addon">Rounds:&lt;/div>
+          &lt;InputNumber 
+            min={ MIN_NUMBER_OF_ROUNDS }
+            max={ MAX_NUMBER_OF_ROUNDS }
+            value={ rounds }
+            onChange={value => {
+              setRounds(value)
+              cipher.setRounds(value)
+            }}
+          />
+        &lt;/div>
+      &lt;/div>
+    &lt;/main>
+  );
+}
+ 
+export default Main;</code></pre>
+        </article>
+    </section>
 
 
 

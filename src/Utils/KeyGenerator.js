@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
  * Can be changed to any ranom string generator.
  * @category Utils
  * @method
- * @returns Random master key
+ * @returns {String} Random master key
  */
 export const generateKey = () => {
   return uuidv4()

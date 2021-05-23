@@ -8,6 +8,12 @@ import {
 } from 'antd';
 import SessionManager from '../../Context/SessionManager'
 
+
+/**
+ * Display Login component
+ * @component
+ * @returns Login component
+ */
 const Login = () => {
   
   const [userAutheticated, setUserAutheticated] = useState(false)

@@ -39,25 +39,15 @@ const TextArea = (props) => {
 }
 
 TextArea.propTypes = {
-  /**
-   * OnChange callback
-   */
+  /** OnChange callback */
   onChange: PropTypes.func,
-  /**
-   * TextArea value
-   */
+  /** TextArea value */
   value: PropTypes.string,
-  /**
-   * Bordered
-   */
+  /** Bordered */
   bordered: PropTypes.bool,
-  /**
-   * Auto size
-   */
+  /** Auto size */
   autoSize: PropTypes.bool,
-  /**
-   * Read only
-   */
+  /** Read only */
   readOnly: PropTypes.bool
 };
 

@@ -7,6 +7,11 @@ import {ReactComponent as Github} from '../../Images/github.svg';
 
 const GITHUB_LINK = "https://github.com/patrykbura/Cipher"
 
+/**
+ * Main layout component
+ * @component
+ * @returns Header, Main and Footer
+ */
 function MainLayout() {
  
   return (

@@ -70,7 +70,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Feistel.html">Feistel</a></li><li><a href="SessionManager.html">SessionManager</a></li></ul><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="TextArea.html">TextArea</a></li></ul></div><div class="category"><h2>Constants</h2><h3>Global</h3><ul><li><a href="global.html#BITWISE_FUNCTIONS">BITWISE_FUNCTIONS</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Global</h3><ul><li><a href="global.html#base64ToUTF16">base64ToUTF16</a></li><li><a href="global.html#binaryToText">binaryToText</a></li><li><a href="global.html#decimalToBinary">decimalToBinary</a></li><li><a href="global.html#enableTabulatorInTextArea">enableTabulatorInTextArea</a></li><li><a href="global.html#from8BitBinaryToUnicode">from8BitBinaryToUnicode</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getBitWiseFunc">getBitWiseFunc</a></li><li><a href="global.html#textToBinary">textToBinary</a></li><li><a href="global.html#textToUnicodeDecimalArray">textToUnicodeDecimalArray</a></li><li><a href="global.html#unicodeTo8BitBinary">unicodeTo8BitBinary</a></li><li><a href="global.html#UTF16ToBase64">UTF16ToBase64</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Feistel.html">Feistel</a></li><li><a href="SessionManager.html">SessionManager</a></li></ul><h3>Components</h3><ul><li><a href="App.html">App</a></li><li><a href="Footer.html">Footer</a></li><li><a href="Header.html">Header</a></li><li><a href="Login.html">Login</a></li><li><a href="MainLayout.html">MainLayout</a></li><li><a href="Selector.html">Selector</a></li><li><a href="TextArea.html">TextArea</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Main">Main</a></li><li><a href="global.html#openNotification">openNotification</a></li></ul></div><div class="category"><h2>Constants</h2><h3>Global</h3><ul><li><a href="global.html#BITWISE_FUNCTIONS">BITWISE_FUNCTIONS</a></li></ul></div><div class="category"><h2>Utils</h2><h3>Global</h3><ul><li><a href="global.html#base64ToUTF16">base64ToUTF16</a></li><li><a href="global.html#binaryToText">binaryToText</a></li><li><a href="global.html#decimalToBinary">decimalToBinary</a></li><li><a href="global.html#enableTabulatorInTextArea">enableTabulatorInTextArea</a></li><li><a href="global.html#from8BitBinaryToUnicode">from8BitBinaryToUnicode</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getBitWiseFunc">getBitWiseFunc</a></li><li><a href="global.html#textToBinary">textToBinary</a></li><li><a href="global.html#textToUnicodeDecimalArray">textToUnicodeDecimalArray</a></li><li><a href="global.html#unicodeTo8BitBinary">unicodeTo8BitBinary</a></li><li><a href="global.html#UTF16ToBase64">UTF16ToBase64</a></li></ul></div>
                 
             </nav>
         </div>
@@ -249,7 +249,7 @@
         
         <span class="code-name">
             
-                base64ToUTF16<span class="signature">(base64)</span><span class="type-signature"></span>
+                base64ToUTF16<span class="signature">(base64)</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -394,6 +394,14 @@
     <div class='param-desc column is-7'>String in Base64 format</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
+    
 </div>
 
                 
@@ -414,7 +422,7 @@
         
         <span class="code-name">
             
-                binaryToText<span class="signature">(binaryInput, bits)</span><span class="type-signature"></span>
+                binaryToText<span class="signature">(binaryInput, bits)</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -584,6 +592,14 @@
     <div class='param-desc column is-7'>Readable string</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
+    
 </div>
 
                 
@@ -625,10 +641,15 @@
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
     
 <div class="table-container">
-    <table class="params table">
+    <table class="props table">
         <thead>
         <tr>
             
@@ -647,136 +668,124 @@
 
         <tbody>
         
-
             
 <tr class="deep-level-0">
-  
-      <td class="name"><code>BITWISE_FUNCTIONS.XOR</code></td>
-  
+    
+        <td class="name"><code>BITWISE_FUNCTIONS.XOR</code></td>
+    
 
-  <td class="type">
-  
-      
+    <td class="type">
+    
+        
 <span class="param-type">function</span>
 
 
-  
-  </td>
+    
+    </td>
 
-  
+    
 
-  
+    
 
-  <td class="description last">Exclusive OR</td>
+    <td class="description last">Exclusive OR</td>
 </tr>
-
 
         
-
             
 <tr class="deep-level-0">
-  
-      <td class="name"><code>BITWISE_FUNCTIONS.OR</code></td>
-  
+    
+        <td class="name"><code>BITWISE_FUNCTIONS.OR</code></td>
+    
 
-  <td class="type">
-  
-      
+    <td class="type">
+    
+        
 <span class="param-type">function</span>
 
 
-  
-  </td>
+    
+    </td>
 
-  
+    
 
-  
+    
 
-  <td class="description last">Bitwise OR</td>
+    <td class="description last">Bitwise OR</td>
 </tr>
-
 
         
-
             
 <tr class="deep-level-0">
-  
-      <td class="name"><code>BITWISE_FUNCTIONS.AND</code></td>
-  
+    
+        <td class="name"><code>BITWISE_FUNCTIONS.AND</code></td>
+    
 
-  <td class="type">
-  
-      
+    <td class="type">
+    
+        
 <span class="param-type">function</span>
 
 
-  
-  </td>
+    
+    </td>
 
-  
+    
 
-  
+    
 
-  <td class="description last">Bitwise AND</td>
+    <td class="description last">Bitwise AND</td>
 </tr>
-
 
         
-
             
 <tr class="deep-level-0">
-  
-      <td class="name"><code>BITWISE_FUNCTIONS.Signed_right_shift</code></td>
-  
+    
+        <td class="name"><code>BITWISE_FUNCTIONS.Signed[]right[]shift</code></td>
+    
 
-  <td class="type">
-  
-      
+    <td class="type">
+    
+        
 <span class="param-type">function</span>
 
 
-  
-  </td>
+    
+    </td>
 
-  
+    
 
-  
+    
 
-  <td class="description last">Bitwise signed right shift</td>
+    <td class="description last">Bitwise signed right shift</td>
 </tr>
-
 
         
-
             
 <tr class="deep-level-0">
-  
-      <td class="name"><code>BITWISE_FUNCTIONS.Zeros_fill_right_shift</code></td>
-  
+    
+        <td class="name"><code>BITWISE_FUNCTIONS.Zeros[]fill[]right[]shift</code></td>
+    
 
-  <td class="type">
-  
-      
+    <td class="type">
+    
+        
 <span class="param-type">function</span>
 
 
-  
-  </td>
+    
+    </td>
 
-  
+    
 
-  
+    
 
-  <td class="description last">Bitwise zeros fill right shift</td>
+    <td class="description last">Bitwise zeros fill right shift</td>
 </tr>
-
 
         
         </tbody>
     </table>
 </div>
-
-
 
 
 
@@ -875,7 +884,7 @@
         
         <span class="code-name">
             
-                decimalToBinary<span class="signature">(decimal, bits)</span><span class="type-signature"></span>
+                decimalToBinary<span class="signature">(decimal, bits)</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -1045,6 +1054,14 @@
     <div class='param-desc column is-7'>Binary string representing decimal</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
+    
 </div>
 
                 
@@ -1065,7 +1082,7 @@
         
         <span class="code-name">
             
-                from8BitBinaryToUnicode<span class="signature">(binary)</span><span class="type-signature"></span>
+                from8BitBinaryToUnicode<span class="signature">(binary)</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -1207,8 +1224,16 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>unicode string</div>
+    <div class='param-desc column is-7'>Unicode string</div>
     
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
     
 </div>
 
@@ -1230,7 +1255,7 @@
         
         <span class="code-name">
             
-                generateKey<span class="signature">()</span><span class="type-signature"></span>
+                generateKey<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -1324,6 +1349,14 @@
     <div class='param-desc column is-7'>Random master key</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
+    
 </div>
 
                 
@@ -1344,7 +1377,7 @@
         
         <span class="code-name">
             
-                getBitWiseFunc<span class="signature">(operator)</span><span class="type-signature"></span>
+                getBitWiseFunc<span class="signature">(operator)</span><span class="type-signature"> &rarr; {function}</span>
             
         </span>
     </h4>
@@ -1489,6 +1522,293 @@
     <div class='param-desc column is-7'>Encrypting function</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">function</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="Main">
+        <a class="href-link" href="#Main">#</a>
+        
+        <span class="code-name">
+            
+                Main<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Main component, handling state of the application
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Components_Main_Main.js.html" class="button">View Source</a>
+            <span>
+                <a href="Components_Main_Main.js.html">Components/Main/Main.js</a>, <a href="Components_Main_Main.js.html#line25">line 25</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>Input and Output areas, buttons</div>
+    
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="openNotification">
+        <a class="href-link" href="#openNotification">#</a>
+        
+        <span class="code-name">
+            
+                openNotification<span class="signature">(text)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Display notification box
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>text</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">Notification description</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="Components_Notification_Notification.js.html" class="button">View Source</a>
+            <span>
+                <a href="Components_Notification_Notification.js.html">Components/Notification/Notification.js</a>, <a href="Components_Notification_Notification.js.html#line10">line 10</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>Notification box in right top corner</div>
+    
+    
 </div>
 
                 
@@ -1509,7 +1829,7 @@
         
         <span class="code-name">
             
-                textToBinary<span class="signature">(textInput, bits)</span><span class="type-signature"></span>
+                textToBinary<span class="signature">(textInput, bits)</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -1679,6 +1999,14 @@
     <div class='param-desc column is-7'>Binary representation of text in string</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
+    
 </div>
 
                 
@@ -1699,7 +2027,7 @@
         
         <span class="code-name">
             
-                textToUnicodeDecimalArray<span class="signature">(text)</span><span class="type-signature"></span>
+                textToUnicodeDecimalArray<span class="signature">(text)</span><span class="type-signature"> &rarr; {Array}</span>
             
         </span>
     </h4>
@@ -1844,6 +2172,14 @@
     <div class='param-desc column is-7'>Array of Unicodes</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Array</span>
+
+
+    </div>
+    
 </div>
 
                 
@@ -1864,7 +2200,7 @@
         
         <span class="code-name">
             
-                unicodeTo8BitBinary<span class="signature">(string)</span><span class="type-signature"></span>
+                unicodeTo8BitBinary<span class="signature">(string)</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -2009,6 +2345,14 @@
     <div class='param-desc column is-7'>8 Bit binary string</div>
     
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
+    
 </div>
 
                 
@@ -2029,7 +2373,7 @@
         
         <span class="code-name">
             
-                UTF16ToBase64<span class="signature">(utf16)</span><span class="type-signature"></span>
+                UTF16ToBase64<span class="signature">(utf16)</span><span class="type-signature"> &rarr; {String}</span>
             
         </span>
     </h4>
@@ -2173,6 +2517,14 @@
     
     <div class='param-desc column is-7'>String in Base64 format</div>
     
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">String</span>
+
+
+    </div>
     
 </div>
 

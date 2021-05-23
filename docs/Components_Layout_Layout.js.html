@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> TextArea</title>
+  <title> Components/Layout/Layout.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,256 +79,49 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Components</p>
-                    <h1>TextArea</h1>
+                    <p>Source</p>
+                    <h1>Components/Layout/Layout.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2>
-            &ltTextArea <i>onChange</i> <i>value</i> <i>bordered</i> <i>autoSize</i> <i>readOnly</i> /&gt
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="TextArea">
-        <a class="href-link" href="#TextArea">#</a>
-        
-        <span class="code-name">
-            
-                &ltTextArea <i>onChange</i> <i>value</i> <i>bordered</i> <i>autoSize</i> <i>readOnly</i> /&gt
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        Component rendering text area
-    </div>
-    
-
-
-
-
-
-
-
-    
-        <h5>PropTypes:</h5>
-        
-<div class="table-container">
-  <table class="params table">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Required</th>
-        <th>Description</th>
-        <th class="last">Default</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>onChange</code></td>
-            <td>
-              func
-            </td>
-            <td>No</td>
-            <td>OnChange callback</td>
-            <td>() => {}</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>value</code></td>
-            <td>
-              string
-            </td>
-            <td>No</td>
-            <td>TextArea value</td>
-            <td>null</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>bordered</code></td>
-            <td>
-              bool
-            </td>
-            <td>No</td>
-            <td>Bordered</td>
-            <td>false</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>autoSize</code></td>
-            <td>
-              bool
-            </td>
-            <td>No</td>
-            <td>Auto size</td>
-            <td>false</td>
-          </tr>
-          
-    
-          <tr class="deep-level-0">
-            <td class="name"><code>readOnly</code></td>
-            <td>
-              bool
-            </td>
-            <td>No</td>
-            <td>Read only</td>
-            <td>false</td>
-          </tr>
-          
-    
-    </tbody>
-  </table>
-</div>
-    
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="Components_TextArea_TextArea.js.html" class="button">View Source</a>
-            <span>
-                <a href="Components_TextArea_TextArea.js.html">Components/TextArea/TextArea.js</a>, <a href="Components_TextArea_TextArea.js.html#line13">line 13</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>Text Area component</div>
-    
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-        
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import './Layout.scss';
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
+import Main from '../Main/Main'
+import {ReactComponent as Github} from '../../Images/github.svg';
+
+const GITHUB_LINK = "https://github.com/patrykbura/Cipher"
+
+/**
+ * Main layout component
+ * @component
+ * @returns Header, Main and Footer
+ */
+function MainLayout() {
+ 
+  return (
+    &lt;div className="app-layout">
+      &lt;div className="app-layout__container"> 
+        &lt;Header/>
+        &lt;Main />
+        &lt;Footer />
+      &lt;/div>
+      &lt;a href={ GITHUB_LINK }>
+        &lt;Github className="app-layout__github"/>
+      &lt;/a>
+    &lt;/div>
+  );
+}
+ 
+export default MainLayout;</code></pre>
+        </article>
+    </section>
 
 
 
