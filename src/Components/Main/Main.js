@@ -16,7 +16,7 @@ import { generateKey } from '../../Utils/KeyGenerator'
 
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;
-const MAX_NUMBER_OF_ROUNDS = 999;
+const MAX_NUMBER_OF_ROUNDS = 1000;
 
 /**
  * Main component, handling state of the application
@@ -43,21 +43,20 @@ const Main = () => {
     setOutputText(decipherValue)
   }
 
-  const checkAndExecute = (func) => {
+  const checkAndExecute = (callback) => {
 
     if (!SessionManager.isAuthenticated) {
       openNotification("Please log in first! You can do that, by refreshing the page")
       return;
     }
 
-    if (!key.length) {
-      const key = generateKey();
-      setKey(key);
-      cipher.setKey(key);
-    }
-
     if (inputText.length) {
-      func()
+      if (!key.length) {
+        const key = generateKey();
+        setKey(key);
+        cipher.setKey(key);
+      }  
+      callback()
     } else {
       openNotification('You need some input in order to do that')
     }
