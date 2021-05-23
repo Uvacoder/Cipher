@@ -12,17 +12,19 @@ import {
   InputNumber
 } from 'antd';
 import BITWISE_FUNCTIONS from '../../Constants/BitwiseFunctions'
+import { generateKey } from '../../Utils/KeyGenerator'
 
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;
 const MAX_NUMBER_OF_ROUNDS = 999;
+const DEFUALT_KEY = generateKey()
 
 const Main = () => {
  
   // const cipher = useMemo(() => new Feistel(key, rounds), []);
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
-  const [key, setKey] = useState("");
+  const [key, setKey] = useState(DEFUALT_KEY);
   const [rounds, setRounds] = useState(null);
   let cipher = new Feistel(key, rounds)
   const setEncryptionOperator = (operator) => {
@@ -36,7 +38,7 @@ const Main = () => {
   const encipher = (inputValue) => {
     // const cipher = new Feistel(key, rounds)
     const encryptedValue = cipher.encrypt(inputValue);
-    setKey(cipher.getKey())
+    // setKey(cipher.getKey())
     setOutputText(encryptedValue)
   }
 
@@ -97,10 +99,11 @@ const Main = () => {
           <Input 
             addonBefore="Key:" 
             placeholder="Insert your key or we will generate in for you" 
-            defaultValue="qwertyZAX"
-            // value={ key }
+            // defaultValue="qwertyZAX"
+            value={ key }
             onChange={e => {
               setKey(e.target.value)
+              //feistel set target key
             }}
           />
         </div>

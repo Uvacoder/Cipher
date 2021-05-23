@@ -1,4 +1,5 @@
 // TODO change names to 16bit
+// todo change ascii to utf16
 
 export const textToAsciiArray = (text) => {
   return text.split('').map(letter => letter.charCodeAt(0))
@@ -32,7 +33,7 @@ export const binaryToText = (binaryInput, bits) => {
 
 // convert a Unicode string to a string in which
 // each 16-bit unit occupies only one byte
-export const unicodeTo16BitBinary = (string) => {
+export const unicodeTo8BitBinary = (string) => {
   const codeUnits = new Uint16Array(string.length);
   for (let i = 0; i < codeUnits.length; i++) {
     codeUnits[i] = string.charCodeAt(i);
@@ -42,7 +43,7 @@ export const unicodeTo16BitBinary = (string) => {
 
 // a string that contains characters occupying > 1 byte
 
-export const from16BitBinaryToUnicode = (binary) => {
+export const from8BitBinaryToUnicode = (binary) => {
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < bytes.length; i++) {
     bytes[i] = binary.charCodeAt(i);
@@ -50,3 +51,12 @@ export const from16BitBinaryToUnicode = (binary) => {
   return String.fromCharCode(...new Uint16Array(bytes.buffer));
 }
 
+export const UTF16ToBase64 = (utf16) => {
+  const converted = unicodeTo8BitBinary(utf16);
+  return btoa(converted);
+}
+
+export const base64ToUTF16 = (base64) => {
+  const decoded = atob(base64);
+  return from8BitBinaryToUnicode(decoded);
+}

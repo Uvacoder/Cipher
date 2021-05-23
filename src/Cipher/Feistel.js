@@ -1,5 +1,5 @@
 import { getBitWiseFunc } from "../Utils/BitwiseFunction"
-import { textToBinary, binaryToText, decimalToBinary, unicodeTo16BitBinary, from16BitBinaryToUnicode } from "../Utils/Converters"
+import { textToBinary, binaryToText, decimalToBinary, UTF16ToBase64, base64ToUTF16 } from "../Utils/Converters"
 import { sha256 } from 'js-sha256';
 
 // coments in this file WiP to make it easier to write documetation on Sunday
@@ -60,7 +60,7 @@ export default class Feistel {
 
   processSingleBlock(mode, inputBinaryText) {
     let [left, right] = this.divideEvenly(inputBinaryText);
-    console.log(inputBinaryText)
+
     for (let i = 0; i < this.rounds; i++) {
       const subKeyIteration = mode === MODES.ENCRYPT ? i : this.rounds - i - 1;
       const key = this.getSubKey(this.masterKey, subKeyIteration);
@@ -74,7 +74,7 @@ export default class Feistel {
   process(mode, inputText) {
     const blocks = this.divideIntoBlocks(inputText);
     let result = '';
-    console.log(blocks)
+
     for (const textBlock of blocks) {  
       const blockResult = this.processSingleBlock(mode, textToBinary(textBlock, CHAR_NO_OF_BITS))
       result += binaryToText(blockResult, CHAR_NO_OF_BITS);
@@ -107,15 +107,14 @@ export default class Feistel {
 
   encrypt(text) {
     const cipher = this.process(MODES.ENCRYPT, text);
-    const converted = unicodeTo16BitBinary(cipher);
-    const encoded = btoa(converted);
 
-    return encoded
+    return UTF16ToBase64(cipher)
   }
 
   decrypt(base64Text) {  
-    const decoded = atob(base64Text);
-    const cipher = from16BitBinaryToUnicode(decoded);
+    // const decoded = atob(base64Text);
+    // const cipher = from16BitBinaryToUnicode(decoded);
+    const cipher = base64ToUTF16(base64Text)
     const result = this.process(MODES.DECRYPT, cipher);
     const paddingIndex = result.indexOf(PADDING_CHARACTER);
     let decryptedText = null;
