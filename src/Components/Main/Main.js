@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './Main.scss';
 import Feistel from '../../Cipher/Feistel'
 import TextArea from '../TextArea/TextArea'
@@ -15,20 +15,23 @@ import BITWISE_FUNCTIONS from '../../Constants/BitwiseFunctions'
 
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;
-const MAX_NUMBER_OF_ROUNDS = 100;
-
-const cipher = new Feistel()
+const MAX_NUMBER_OF_ROUNDS = 999;
 
 const Main = () => {
+ 
   // const cipher = useMemo(() => new Feistel(key, rounds), []);
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [key, setKey] = useState("");
   const [rounds, setRounds] = useState(null);
-
+  let cipher = new Feistel(key, rounds)
   const setEncryptionOperator = (operator) => {
     cipher.setEncryptionOperator(operator)
   }
+
+  useEffect(() => {
+    cipher = new Feistel(key, rounds)
+  },[key])
 
   const encipher = (inputValue) => {
     // const cipher = new Feistel(key, rounds)
@@ -94,7 +97,8 @@ const Main = () => {
           <Input 
             addonBefore="Key:" 
             placeholder="Insert your key or we will generate in for you" 
-            value={ key || ''}
+            defaultValue="qwertyZAX"
+            // value={ key }
             onChange={e => {
               setKey(e.target.value)
             }}
