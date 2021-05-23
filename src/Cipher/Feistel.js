@@ -221,3 +221,12 @@ class Feistel {
 }
 
 export default Feistel;
+
+const algo = new Feistel()
+window.hashKey = algo.hashKey;
+window.getSubKey = algo.getSubKey;
+window.divideEvenly = algo.divideEvenly;
+window.makeRound = algo.makeRound;
+window.processSingleBlock = algo.processSingleBlock
+window.process = algo.process
+window.divideIntoBlocks = algo.divideIntoBlocks
