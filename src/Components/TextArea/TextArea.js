@@ -1,9 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import { Input } from 'antd';
 import { enableTabulatorInTextArea } from '../../Utils/InputHelpers';
+import PropTypes from 'prop-types';
 
 const { TextArea: AntdTextArea } = Input;
 
+/**
+ * Component rendering text area
+ * @component
+ * @returns Text Area component
+ */
 const TextArea = (props) => {
   const textAreaRef = useRef(null);
   
@@ -31,6 +37,29 @@ const TextArea = (props) => {
     />
   )
 }
+
+TextArea.propTypes = {
+  /**
+   * OnChange callback
+   */
+  onChange: PropTypes.func,
+  /**
+   * TextArea value
+   */
+  value: PropTypes.string,
+  /**
+   * Bordered
+   */
+  bordered: PropTypes.bool,
+  /**
+   * Auto size
+   */
+  autoSize: PropTypes.bool,
+  /**
+   * Read only
+   */
+  readOnly: PropTypes.bool
+};
 
 TextArea.defaultProps = {
   onChange: () => {},
