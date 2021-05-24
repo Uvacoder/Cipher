@@ -2,10 +2,12 @@ import React from 'react';
 import './Layout.scss';
 import Header from 'Components/Header/Header'
 import Footer from 'Components/Footer/Footer'
-import Main from 'Components/Main/Main'
+import Main from 'Containers/Main/Main'
 import {ReactComponent as Github} from 'Images/github.svg';
+import {ReactComponent as Doc} from 'Images/doc.svg';
 
 const GITHUB_LINK = "https://github.com/patrykbura/Cipher"
+const DOCUMENTATION_LINK = "./docs"
 
 /**
  * Main layout component
@@ -22,6 +24,9 @@ function MainLayout() {
       </div>
       <a href={ GITHUB_LINK }>
         <Github className="app-layout__github"/>
+      </a>
+      <a href={ DOCUMENTATION_LINK }>
+        <Doc className="app-layout__doc"/>
       </a>
     </div>
   );

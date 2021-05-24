@@ -20,18 +20,26 @@
     grid-gap: 10px;
   }
 
-  .app-layout__github {
+  .app-layout__github, .app-layout__doc {
     fill: white;
     position: fixed;
-    bottom: 20px;
-    left: 20px;
     width: 50px;
     height: 50px;
     transition: transform .2s;
     z-index: 3;
   };
 
-  .app-layout__github:hover {
+  .app-layout__doc {
+    bottom: 20px;
+    left: 90px;
+  }
+
+  .app-layout__github{
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .app-layout__github:hover, .app-layout__doc:hover {
     transform: scale(1.3);
   }
 }

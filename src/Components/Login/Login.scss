@@ -42,7 +42,7 @@
       display: flex;
       justify-content: space-evenly;
 
-      .login-container__buttons--login {
+      .login-container__buttons--login{
         border: none;
         color: #24292e;
         transition: transform .2s;
@@ -68,6 +68,19 @@
     .ant-input{
       background-color: $background-color-input;
       color: $font-color;
+    }
+  }
+}
+
+.login-container__buttons-tooltip {
+  .ant-tooltip-inner {
+    color: $font-color;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.877);
+  
+    p {
+      margin-bottom: 2px;
     }
   }
 }

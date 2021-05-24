@@ -34,11 +34,14 @@ reactComponents['Header'] = Component2;
 import Component3 from '../src/Components/Login/Login.js';
 reactComponents['Login'] = Component3;
 
-import Component4 from '../src/Components/Layout/Layout.js';
-reactComponents['MainLayout'] = Component4;
+import Component4 from '../src/Containers/Main/Main.js';
+reactComponents['Main'] = Component4;
 
-import Component5 from '../src/Components/Selector/Selector.js';
-reactComponents['Selector'] = Component5;
+import Component5 from '../src/Components/Layout/Layout.js';
+reactComponents['MainLayout'] = Component5;
 
-import Component6 from '../src/Components/TextArea/TextArea.js';
-reactComponents['TextArea'] = Component6;
+import Component6 from '../src/Components/Selector/Selector.js';
+reactComponents['Selector'] = Component6;
+
+import Component7 from '../src/Components/TextArea/TextArea.js';
+reactComponents['TextArea'] = Component7;

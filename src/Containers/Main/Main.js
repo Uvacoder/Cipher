@@ -6,6 +6,7 @@ import Selector from 'Components/Selector/Selector'
 import openNotification from 'Components/Notification/Notification'
 import SessionManager from 'Context/SessionManager'
 import BITWISE_FUNCTIONS from 'Constants/BitwiseFunctions'
+import PropTypes from 'prop-types';
 import { generateKey } from 'Utils/KeyGenerator'
 import { 
   Input, 
@@ -20,10 +21,11 @@ const DEFAULT_NUMBER_OF_ROUNDS = 8;
 const MAX_NUMBER_OF_ROUNDS = 1000;
 
 /**
- * Main component, handling state of the application
+ * Main component of application
+ * @component
  * @returns Input and Output areas, buttons
  */
-const Main = () => {
+const Main = (props) => {
   const cipher = useMemo(() => new Feistel(DEFAULT_NUMBER_OF_ROUNDS), []);
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
@@ -38,9 +40,9 @@ const Main = () => {
     setKey(key)
     cipher.setKey(key)
   }
-
+  
   const checkAndExecute = (callback) => {
-    if (!SessionManager.isAuthenticated) {
+    if (props.useAuth && !SessionManager.isAuthenticated) {
       openNotification('Please log in first! You can do that, by refreshing the page')
       return;
     }
@@ -113,5 +115,14 @@ const Main = () => {
     </main>
   );
 }
- 
+
+ Main.propTypes = {
+  /** Determines whether to use authorization */
+  useAuth: PropTypes.bool
+};
+
+Main.defaultProps = {
+  useAuth: true
+}
+
 export default Main;

@@ -5,9 +5,9 @@ import {
   Form, 
   Input, 
   Button, 
+  Tooltip
 } from 'antd';
 import SessionManager from 'Context/SessionManager'
-
 
 /**
  * Display Login component
@@ -15,7 +15,6 @@ import SessionManager from 'Context/SessionManager'
  * @returns Login component
  */
 const Login = () => {
-  
   const [userAutheticated, setUserAutheticated] = useState(false)
   const formRef = useRef(null)
 
@@ -33,6 +32,15 @@ const Login = () => {
 
     setUserAutheticated(isLogged)
   };
+
+  const renderTooltipMessage = () => {
+    return (
+      <>
+        <p>Master password: admin</p>
+        <p>(Due to app being a demo)</p>
+      </>
+    )
+  }
 
   const renderLabel = () => {
     return (
@@ -63,14 +71,20 @@ const Login = () => {
   const renderLogInButton  = () => {
     return (
       <Form.Item >
-        <div className='login-container__buttons'>
-          <Button 
-            type="primary" 
-            htmlType="submit"
-            className='login-container__buttons--login'
+        <div className="login-container__buttons">
+          <Tooltip 
+            placement="bottom" 
+            title={ renderTooltipMessage() }
+            overlayClassName="login-container__buttons-tooltip"
           >
-            Sign In
-          </Button>
+            <Button 
+              type="primary" 
+              htmlType="submit"
+              className='login-container__buttons--login'
+            >
+              Sign In
+            </Button>
+          </Tooltip>
         </div>
       </Form.Item>
     )
