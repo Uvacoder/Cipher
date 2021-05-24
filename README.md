@@ -2,8 +2,9 @@
 
 *This is an ecnryption tool that implements Feistel Cipher and allows to encrypt and decrypt any text string - inluding all languages characters, symbols and emojis.*
 
-### Demo
-#### **[cipher.ovh](https://www.cipher.ovh/)**
+### Links
+#### **[Demo](https://www.cipher.ovh/)**
+#### **[Documentation](https://www.cipher.ovh/docs)**
 
 ### Motivation
 
