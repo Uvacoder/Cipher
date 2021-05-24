@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Input } from 'antd';
-import { enableTabulatorInTextArea } from '../../Utils/InputHelpers';
+import { enableTabulatorInTextArea } from 'Utils/InputHelpers';
 import PropTypes from 'prop-types';
 
 const { TextArea: AntdTextArea } = Input;

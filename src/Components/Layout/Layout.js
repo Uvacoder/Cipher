@@ -1,9 +1,9 @@
 import React from 'react';
 import './Layout.scss';
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import Main from '../Main/Main'
-import {ReactComponent as Github} from '../../Images/github.svg';
+import Header from 'Components/Header/Header'
+import Footer from 'Components/Footer/Footer'
+import Main from 'Components/Main/Main'
+import {ReactComponent as Github} from 'Images/github.svg';
 
 const GITHUB_LINK = "https://github.com/patrykbura/Cipher"
 
@@ -13,7 +13,6 @@ const GITHUB_LINK = "https://github.com/patrykbura/Cipher"
  * @returns Header, Main and Footer
  */
 function MainLayout() {
- 
   return (
     <div className="app-layout">
       <div className="app-layout__container"> 

@@ -1,18 +1,18 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import './Main.scss';
-import Feistel from '../../Cipher/Feistel'
-import TextArea from '../TextArea/TextArea'
-import SessionManager from '../../Context/SessionManager'
-import openNotification from '../Notification/Notification'
-import Selector from '../Selector/Selector'
+import Feistel from 'Cipher/Feistel'
+import TextArea from 'Components/TextArea/TextArea'
+import SessionManager from 'Context/SessionManager'
+import openNotification from 'Components/Notification/Notification'
+import Selector from 'Components/Selector/Selector'
 import { 
   Input, 
   Button,
   Card, 
   InputNumber
 } from 'antd';
-import BITWISE_FUNCTIONS from '../../Constants/BitwiseFunctions'
-import { generateKey } from '../../Utils/KeyGenerator'
+import BITWISE_FUNCTIONS from 'Constants/BitwiseFunctions'
+import { generateKey } from 'Utils/KeyGenerator'
 
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;

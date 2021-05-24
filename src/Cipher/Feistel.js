@@ -1,4 +1,4 @@
-import { getBitWiseFunc } from "../Utils/BitwiseFunction"
+import { getBitWiseFunc } from "Utils/BitwiseFunction"
 import { sha256 } from 'js-sha256';
 import { 
   textToBinary,
@@ -6,7 +6,7 @@ import {
   decimalToBinary, 
   UTF16ToBase64, 
   base64ToUTF16 
-} from "../Utils/Converters"
+} from "Utils/Converters"
 
 const CHAR_NO_OF_BITS = 16; // UTF-16 number of bits to each sign
 const PADDING_CHARACTER = '\u0003' // Unicode 'End of Text'

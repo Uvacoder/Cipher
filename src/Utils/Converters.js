@@ -51,7 +51,6 @@ export const binaryToText = (binaryInput, bits) => {
   return binaryInput.match(regex).map((el) => String.fromCharCode((parseInt(el, 2)))).join('')
 }
 
-
 /**
  * convert a Unicode string to a string in which
  * each 16-bit unit occupies only one byte<br>
@@ -110,5 +109,3 @@ export const base64ToUTF16 = (base64) => {
   const decoded = atob(base64);
   return from8BitBinaryToUnicode(decoded);
 }
-
-window.base64ToUTF16 = base64ToUTF16

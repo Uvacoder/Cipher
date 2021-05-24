@@ -6,7 +6,7 @@ import {
   Input, 
   Button, 
 } from 'antd';
-import SessionManager from '../../Context/SessionManager'
+import SessionManager from 'Context/SessionManager'
 
 
 /**

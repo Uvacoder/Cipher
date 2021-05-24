@@ -7,7 +7,6 @@ import './Header.scss';
  * @returns Titile and description
  */
 function Header() {
- 
   return (
     <header className="header">
       <p>Encryption Tool</p>
