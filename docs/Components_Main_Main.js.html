@@ -107,7 +107,8 @@ import { generateKey } from '../../Utils/KeyGenerator'
 
 const OPTIONS = Object.keys(BITWISE_FUNCTIONS)
 const MIN_NUMBER_OF_ROUNDS = 2;
-const MAX_NUMBER_OF_ROUNDS = 999;
+const DEFAULT_NUMBER_OF_ROUNDS = 8;
+const MAX_NUMBER_OF_ROUNDS = 1000;
 
 /**
  * Main component, handling state of the application
@@ -115,11 +116,11 @@ const MAX_NUMBER_OF_ROUNDS = 999;
  */
 const Main = () => {
  
-  const cipher = useMemo(() => new Feistel(), []);
+  const cipher = useMemo(() => new Feistel(DEFAULT_NUMBER_OF_ROUNDS), []);
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [key, setKey] = useState("");
-  const [rounds, setRounds] = useState(MIN_NUMBER_OF_ROUNDS);
+  const [rounds, setRounds] = useState(DEFAULT_NUMBER_OF_ROUNDS);
   const setEncryptionOperator = (operator) => {
     cipher.setEncryptionOperator(operator)
   }
@@ -134,21 +135,20 @@ const Main = () => {
     setOutputText(decipherValue)
   }
 
-  const checkAndExecute = (func) => {
+  const checkAndExecute = (callback) => {
 
     if (!SessionManager.isAuthenticated) {
       openNotification("Please log in first! You can do that, by refreshing the page")
       return;
     }
 
-    if (!key.length) {
-      const key = generateKey();
-      setKey(key);
-      cipher.setKey(key);
-    }
-
     if (inputText.length) {
-      func()
+      if (!key.length) {
+        const key = generateKey();
+        setKey(key);
+        cipher.setKey(key);
+      }  
+      callback()
     } else {
       openNotification('You need some input in order to do that')
     }

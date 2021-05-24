@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Cipher
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+*This is an ecnryption tool that implements Feistel Cipher and allows to encrypt and decrypt any text string - inluding all languages characters, symbols and emojis.*
 
-## Available Scripts
+### Demo
+#### **[cipher.ovh](https://www.cipher.ovh/)**
 
-In the project directory, you can run:
+### Motivation
 
-### `yarn start`
+This tool was created for the recruitment process and as a portfolio. But also to to learn and improve programming skills.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Password
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> **Password** : *admin*
 
-### `yarn test`
+As mentioned above, this tool was created for the recruitment process  which required logging in, thus the password is made public.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Feistel Cipher implementation
 
-### `yarn build`
+You can read how Feistel Cipher works on [Wikipedia](https://en.wikipedia.org/wiki/Feistel_cipher)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Diagram below shows basic usage:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![enter image description here](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Feistel_cipher_diagram_en.svg/410px-Feistel_cipher_diagram_en.svg.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Algorithm assumptions:
+ - Encrypting function F defined as one of:
+	 - xor
+	 - or
+	 - and
+	 - signed right shift
+	 - zeros fill right shift
+ - Round-dependant key (sub-key) creation function:
+    1. Define master key as hashed user provided key (string) with sh256 hash function truncated to 64bit hash
+    2. Round subkey is defined as sha256 of _master key_ + _round number_ + _round number to the power of 37_ truncated to 64bit hash
+- Every character is represented in 16bit format
+- Every block size has size of 128bit
+- Key size is 64bit
+- Padding character is defined as Unicode End of Text (\u0003)
+- In order to provide user friendly encrypted text, result of algorithm is converted to Base64 on input and output.
 
-### `yarn eject`
+### Algorithm steps:
+##### Encryption
+1. Divide input string into 128bit blocks
+    - Due to asumptions every single block has 8 characters (block size 128bit / char size 16bit)
+    - Last block is filled with padding character when necessary - less than 8 characters
+2. Every block is processed separately
+3. Each block input text is converted to binary represantation
+4. Core Feistel Cipher alhorithm is executed
+   - Binary input is split into two equal pieces
+   - In each round right halft of the block goes through unchanged and becomes new left
+   - Left half is XOR-ed with output of encryption function F that takes right side and round key as parameters - result of that becomes new left
+   - Once the last round is completed - right side is swapped with left.
+5. Concatenate results from each block converted back to UTF16 string as final cipher
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+##### Decryption
+1. Same as encryption process but order of applied keys is reversed.
+2. Possible padding characters (\u0003) are removed from final text.
+ 
+### Tests
+Cipher app includes unit tests created with [JEST.js](https://jestjs.io/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Documentation
+Documentation created with [JSDoc](https://jsdoc.app/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Available at **[cipher.ovh/docs](https://www.cipher.ovh/docs/)**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Available Scripts
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+npm run start - Runs the app in the development mode
+npm run test - Runs all tests
+npm run build - Builds the app for production to the build folder
+npm run docs - Generates docs in docs folder
+```
+****
+&copy; May 2021 Patryk Bura

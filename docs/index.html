@@ -104,44 +104,83 @@
 
 
     <section>
-        <article><h1>Getting Started with Create React App</h1>
-<p>This project was bootstrapped with <a href="https://github.com/facebook/create-react-app">Create React App</a>.</p>
-<h2>Available Scripts</h2>
-<p>In the project directory, you can run:</p>
-<h3><code>yarn start</code></h3>
-<p>Runs the app in the development mode.<br>
-Open <a href="http://localhost:3000">http://localhost:3000</a> to view it in the browser.</p>
-<p>The page will reload if you make edits.<br>
-You will also see any lint errors in the console.</p>
-<h3><code>yarn test</code></h3>
-<p>Launches the test runner in the interactive watch mode.<br>
-See the section about <a href="https://facebook.github.io/create-react-app/docs/running-tests">running tests</a> for more information.</p>
-<h3><code>yarn build</code></h3>
-<p>Builds the app for production to the <code>build</code> folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.</p>
-<p>The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!</p>
-<p>See the section about <a href="https://facebook.github.io/create-react-app/docs/deployment">deployment</a> for more information.</p>
-<h3><code>yarn eject</code></h3>
-<p><strong>Note: this is a one-way operation. Once you <code>eject</code>, you can’t go back!</strong></p>
-<p>If you aren’t satisfied with the build tool and configuration choices, you can <code>eject</code> at any time. This command will remove the single build dependency from your project.</p>
-<p>Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except <code>eject</code> will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.</p>
-<p>You don’t have to ever use <code>eject</code>. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.</p>
-<h2>Learn More</h2>
-<p>You can learn more in the <a href="https://facebook.github.io/create-react-app/docs/getting-started">Create React App documentation</a>.</p>
-<p>To learn React, check out the <a href="https://reactjs.org/">React documentation</a>.</p>
-<h3>Code Splitting</h3>
-<p>This section has moved here: <a href="https://facebook.github.io/create-react-app/docs/code-splitting">https://facebook.github.io/create-react-app/docs/code-splitting</a></p>
-<h3>Analyzing the Bundle Size</h3>
-<p>This section has moved here: <a href="https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size">https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size</a></p>
-<h3>Making a Progressive Web App</h3>
-<p>This section has moved here: <a href="https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app">https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app</a></p>
-<h3>Advanced Configuration</h3>
-<p>This section has moved here: <a href="https://facebook.github.io/create-react-app/docs/advanced-configuration">https://facebook.github.io/create-react-app/docs/advanced-configuration</a></p>
-<h3>Deployment</h3>
-<p>This section has moved here: <a href="https://facebook.github.io/create-react-app/docs/deployment">https://facebook.github.io/create-react-app/docs/deployment</a></p>
-<h3><code>yarn build</code> fails to minify</h3>
-<p>This section has moved here: <a href="https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify">https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify</a></p></article>
+        <article><h1>Cipher</h1>
+<p><em>This is an ecnryption tool that implements Feistel Cipher and allows to encrypt and decrypt any text string - inluding all languages characters, symbols and emojis.</em></p>
+<h3>Demo</h3>
+<h4><strong><a href="https://www.cipher.ovh/">cipher.ovh</a></strong></h4>
+<h3>Motivation</h3>
+<p>This tool was created for the recruitment process and as a portfolio. But also to to learn and improve programming skills.</p>
+<h3>Password</h3>
+<blockquote>
+<p><strong>Password</strong> : <em>admin</em></p>
+</blockquote>
+<p>As mentioned above, this tool was created for the recruitment process  which required logging in, thus the password is made public.</p>
+<h2>Feistel Cipher implementation</h2>
+<p>You can read how Feistel Cipher works on <a href="https://en.wikipedia.org/wiki/Feistel_cipher">Wikipedia</a></p>
+<p>Diagram below shows basic usage:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Feistel_cipher_diagram_en.svg/410px-Feistel_cipher_diagram_en.svg.png" alt="enter image description here"></p>
+<h3>Algorithm assumptions:</h3>
+<ul>
+<li>Encrypting function F defined as one of:
+<ul>
+<li>xor</li>
+<li>or</li>
+<li>and</li>
+<li>signed right shift</li>
+<li>zeros fill right shift</li>
+</ul>
+</li>
+<li>Round-dependant key (sub-key) creation function:
+<ol>
+<li>Define master key as hashed user provided key (string) with sh256 hash function truncated to 64bit hash</li>
+<li>Round subkey is defined as sha256 of <em>master key</em> + <em>round number</em> + <em>round number to the power of 37</em> truncated to 64bit hash</li>
+</ol>
+</li>
+<li>Every character is represented in 16bit format</li>
+<li>Every block size has size of 128bit</li>
+<li>Key size is 64bit</li>
+<li>Padding character is defined as Unicode End of Text (\u0003)</li>
+<li>In order to provide user friendly encrypted text, result of algorithm is converted to Base64 on input and output.</li>
+</ul>
+<h3>Algorithm steps:</h3>
+<h5>Encryption</h5>
+<ol>
+<li>Divide input string into 128bit blocks
+<ul>
+<li>Due to asumptions every single block has 8 characters (block size 128bit / char size 16bit)</li>
+<li>Last block is filled with padding character when necessary - less than 8 characters</li>
+</ul>
+</li>
+<li>Every block is processed separately</li>
+<li>Each block input text is converted to binary represantation</li>
+<li>Core Feistel Cipher alhorithm is executed
+<ul>
+<li>Binary input is split into two equal pieces</li>
+<li>In each round right halft of the block goes through unchanged and becomes new left</li>
+<li>Left half is XOR-ed with output of encryption function F that takes right side and round key as parameters - result of that becomes new left</li>
+<li>Once the last round is completed - right side is swapped with left.</li>
+</ul>
+</li>
+<li>Concatenate results from each block converted back to UTF16 string as final cipher</li>
+</ol>
+<h5>Decryption</h5>
+<ol>
+<li>Same as encryption process but order of applied keys is reversed.</li>
+<li>Possible padding characters (\u0003) are removed from final text.</li>
+</ol>
+<h1>Tests</h1>
+<p>Cipher app includes unit tests created with <a href="https://jestjs.io/">JEST.js</a></p>
+<h1>Documentation</h1>
+<p>Documentation created with <a href="https://jsdoc.app/">JSDoc</a></p>
+<p>Available at <strong><a href="https://www.cipher.ovh/docs/">cipher.ovh/docs</a></strong></p>
+<h1>Available Scripts</h1>
+<pre class="prettyprint source"><code>npm run start - Runs the app in the development mode
+npm run test - Runs all tests
+npm run build - Builds the app for production to the build folder
+npm run docs - Generates docs in docs folder
+</code></pre>
+<hr>
+<p>© May 2021 Patryk Bura</p></article>
     </section>
 
 

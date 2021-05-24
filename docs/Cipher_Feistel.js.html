@@ -91,7 +91,8 @@
         <article>
             <pre class="prettyprint source linenums"><code>import { getBitWiseFunc } from "../Utils/BitwiseFunction"
 import { sha256 } from 'js-sha256';
-import { textToBinary,
+import { 
+  textToBinary,
   binaryToText, 
   decimalToBinary, 
   UTF16ToBase64, 
@@ -124,7 +125,7 @@ class Feistel {
    * @param {String} key Main encrypting key 
    * @param {Number} rounds Number of encryption rounds
    */
-  constructor(key = DEFAULT_KEY, rounds = DEFAULT_ROUND_NO) {
+  constructor(rounds = DEFAULT_ROUND_NO, key = DEFAULT_KEY) {
     this.setKey(key)
     this.rounds = rounds
     this.encryptionFunction = getBitWiseFunc((a,b) => a ^ b)
