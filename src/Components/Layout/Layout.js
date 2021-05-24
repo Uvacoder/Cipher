@@ -7,7 +7,7 @@ import {ReactComponent as Github} from 'Images/github.svg';
 import {ReactComponent as Doc} from 'Images/doc.svg';
 
 const GITHUB_LINK = "https://github.com/patrykbura/Cipher"
-const DOCUMENTATION_LINK = "./docs"
+const DOCUMENTATION_LINK = "https://www.cipher.ovh/docs"
 
 /**
  * Main layout component
