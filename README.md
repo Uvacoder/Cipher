@@ -8,13 +8,13 @@
 
 ### Motivation
 
-This tool was created for the recruitment process and as a portfolio. But also to to learn and improve programming skills.
+This tool was created for the recruitment process and as a portfolio. As well to to learn and improve programming skills.
 
 ### Password
 
 > **Password** : *admin*
 
-As mentioned above, this tool was created for the recruitment process  which required logging in, thus the password is made public.
+As mentioned above, this tool was created for the recruitment process which required logging in, thus the password is made public.
 
 ## Feistel Cipher implementation
 
