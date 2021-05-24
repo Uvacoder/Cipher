@@ -7,7 +7,7 @@ import Login from './Components/Login/Login'
  * @component
  * @returns Main app components - Login && Layout
  */
-function App() {
+const App = () => {
   return (
     <>
       <div className="app">

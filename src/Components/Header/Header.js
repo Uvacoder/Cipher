@@ -6,7 +6,7 @@ import './Header.scss';
  * @component
  * @returns Titile and description
  */
-function Header() {
+const Header = () => {
   return (
     <header className="header">
       <p>Encryption Tool</p>

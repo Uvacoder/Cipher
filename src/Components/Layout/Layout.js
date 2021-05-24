@@ -14,7 +14,7 @@ const DOCUMENTATION_LINK = "./docs"
  * @component
  * @returns Header, Main and Footer
  */
-function MainLayout() {
+const MainLayout = () => {
   return (
     <div className="app-layout">
       <div className="app-layout__container"> 
