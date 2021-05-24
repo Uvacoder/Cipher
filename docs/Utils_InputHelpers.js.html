@@ -96,6 +96,7 @@
  */
 export const enableTabulatorInTextArea = (textArea) => {
   textArea.addEventListener('keydown', function(e) {
+    // eslint-disable-next-line
     if (e.key == 'Tab') {
       e.preventDefault();
       const start = this.selectionStart;

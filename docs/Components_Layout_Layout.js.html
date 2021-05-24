@@ -96,9 +96,11 @@ import Footer from 'Components/Footer/Footer'
 import Main from 'Containers/Main/Main'
 import {ReactComponent as Github} from 'Images/github.svg';
 import {ReactComponent as Doc} from 'Images/doc.svg';
+import {ReactComponent as Doccker} from 'Images/docker.svg';
 
 const GITHUB_LINK = "https://github.com/patrykbura/Cipher"
-const DOCUMENTATION_LINK = "./docs"
+const DOCUMENTATION_LINK = "https://www.cipher.ovh/docs"
+const DOCKER_LINK = "https://hub.docker.com/repository/docker/patrykbura/cipher-app"
 
 /**
  * Main layout component
@@ -115,6 +117,9 @@ const MainLayout = () => {
       &lt;/div>
       &lt;a href={ GITHUB_LINK }>
         &lt;Github className="app-layout__github"/>
+      &lt;/a>
+      &lt;a href={ DOCKER_LINK }>
+        &lt;Doccker className="app-layout__docker"/>
       &lt;/a>
       &lt;a href={ DOCUMENTATION_LINK }>
         &lt;Doc className="app-layout__doc"/>

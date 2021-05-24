@@ -20,7 +20,7 @@
     grid-gap: 10px;
   }
 
-  .app-layout__github, .app-layout__doc {
+  .app-layout__github, .app-layout__doc, .app-layout__docker {
     fill: white;
     position: fixed;
     width: 50px;
@@ -31,7 +31,7 @@
 
   .app-layout__doc {
     bottom: 20px;
-    left: 90px;
+    left: 160px;
   }
 
   .app-layout__github{
@@ -39,7 +39,12 @@
     left: 20px;
   }
 
-  .app-layout__github:hover, .app-layout__doc:hover {
+  .app-layout__docker{
+    bottom: 20px;
+    left: 90px;
+  }
+
+  .app-layout__github:hover, .app-layout__doc:hover, .app-layout__docker:hover {
     transform: scale(1.3);
   }
 }

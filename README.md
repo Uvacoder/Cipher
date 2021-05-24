@@ -30,7 +30,6 @@ Diagram below shows basic usage:
 	 - or
 	 - and
 	 - signed right shift
-	 - zeros fill right shift
  - Round-dependant key (sub-key) creation function:
     1. Define master key as hashed user provided key (string) with sh256 hash function truncated to 64bit hash
     2. Round subkey is defined as sha256 of _master key_ + _round number_ + _round number to the power of 37_ truncated to 64bit hash
